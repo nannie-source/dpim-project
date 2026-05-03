@@ -1,0 +1,424 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Sarabun',system-ui,sans-serif}
+.page{background:#fff;width:100%;padding-bottom:2rem}
+/* HEADER */
+.hdr{background:#0D3B6E;padding:1.2rem 1.4rem;position:relative;overflow:hidden}
+.hdr::after{content:'';position:absolute;right:-20px;top:-20px;width:120px;height:120px;background:#1B5EA0;border-radius:50%;opacity:.3}
+.hdr-tag{font-size:10px;letter-spacing:.1em;color:#7EC8F0;margin-bottom:.3rem}
+.hdr-title{font-size:20px;font-weight:700;color:#fff;position:relative;z-index:1}
+.hdr-sub{font-size:12px;color:#A8D4EF;margin-top:.25rem}
+.legend{display:flex;gap:.75rem;flex-wrap:wrap;padding:.65rem 1.2rem;border-bottom:1px solid #EEE;background:#FAFAFA}
+.leg{display:flex;align-items:center;gap:.35rem;font-size:11px;color:#444}
+.leg-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+
+/* MAIN FLOW COLUMN */
+.flow-col{display:flex;flex-direction:column;align-items:center;padding:0 .75rem}
+/* STAGE WRAPPER */
+.stage{width:100%;display:grid;grid-template-columns:130px 1fr;gap:.5rem;padding:.55rem .75rem;align-items:start}
+.stage-label{display:flex;flex-direction:column;align-items:flex-end;padding-right:.6rem;padding-top:.3rem;border-right:2px solid #DDE3EA}
+.slabel{font-size:10px;font-weight:600;color:#0D3B6E;text-align:right;line-height:1.4}
+.ssub{font-size:9px;color:#888;text-align:right}
+.stage-body{display:flex;flex-direction:column;gap:.4rem}
+
+/* ACTOR BOX */
+.actor{border-radius:8px;padding:.6rem .75rem;border:1px solid transparent}
+.actor-name{font-size:12px;font-weight:600;line-height:1.4}
+.actor-desc{font-size:10.5px;color:#555;line-height:1.5;margin-top:.2rem}
+.tags-row{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.35rem}
+.tag{font-size:9.5px;padding:2px 7px;border-radius:10px;font-weight:500}
+
+/* COLORS */
+.c-blue-dark{background:#E8F4FD;border-color:#B3D9F5}
+.c-green{background:#E8F5E9;border-color:#A5D6A7}
+.c-orange{background:#FFF3E0;border-color:#FFCC80}
+.c-purple{background:#F3E5F5;border-color:#CE93D8}
+.c-teal{background:#E0F7FA;border-color:#80DEEA}
+.c-red-soft{background:#FFF8F8;border-color:#FFCDD2}
+.c-gray-soft{background:#F5F7FA;border-color:#DDE3EA}
+.c-yellow{background:#FFFDE7;border-color:#FFF176}
+
+.tag-paper{background:#FFECB3;color:#7B5E00}
+.tag-digital{background:#E3F2FD;color:#0D47A1}
+.tag-hybrid{background:#F3E5F5;color:#4A148C}
+.tag-law{background:#FFEBEE;color:#B71C1C}
+.tag-data{background:#E8F5E9;color:#1B5E20}
+
+/* ARROW */
+.arr-down{display:flex;justify-content:center;padding:.2rem 0;position:relative}
+.arr-line{width:2px;height:28px;background:#B0BEC5}
+.arr-tip{width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:9px solid #B0BEC5;margin-top:0}
+.arr-label{position:absolute;right:calc(50% + 10px);top:50%;transform:translateY(-50%);font-size:9px;color:#78909C;white-space:nowrap;max-width:90px;text-align:right}
+
+/* SRKH GRID */
+.srkh-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;width:100%}
+.srkh-box{background:#E8F4FD;border:1px solid #90CAF9;border-radius:6px;padding:.4rem .45rem;text-align:center}
+.srkh-num{font-size:9px;font-weight:700;color:#0D47A1}
+.srkh-city{font-size:10px;font-weight:600;color:#1565C0;margin:.1rem 0}
+.srkh-region{font-size:8.5px;color:#666}
+
+/* DATA TYPES STRIP */
+.data-strip{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.35rem}
+.dtype{font-size:9.5px;padding:2px 8px;border-radius:10px;background:#E3F2FD;color:#0D47A1;border:1px solid #90CAF9}
+
+/* PAIN POINT */
+.pain{background:#FFF8E1;border:1px solid #FFE082;border-radius:6px;padding:.45rem .6rem;margin-top:.35rem;display:flex;align-items:flex-start;gap:.4rem}
+.pain-icon{font-size:12px;flex-shrink:0;margin-top:1px}
+.pain-text{font-size:10px;color:#7B5E00;line-height:1.5}
+
+/* DESIRED */
+.desired{background:#E8F5E9;border:1px solid #A5D6A7;border-radius:6px;padding:.45rem .6rem;margin-top:.35rem;display:flex;align-items:flex-start;gap:.4rem}
+.desired-icon{font-size:12px;flex-shrink:0;margin-top:1px}
+.desired-text{font-size:10px;color:#1B5E20;line-height:1.5}
+
+/* DIVIDER ROW */
+.div-row{border-top:1px dashed #DDE3EA;margin:.2rem .75rem}
+
+/* RIGHT PANEL - sticky data types */
+.two-col{display:grid;grid-template-columns:1fr 260px;gap:0;align-items:start}
+.right-panel{padding:.75rem .6rem;border-left:1px solid #EEE;background:#FAFBFC;position:sticky;top:0}
+.rp-section{margin-bottom:.85rem}
+.rp-title{font-size:10px;font-weight:700;color:#0D3B6E;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem;padding-bottom:.25rem;border-bottom:1px solid #E0E0E0}
+
+/* BOTTOM SUMMARY */
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;padding:.75rem 1rem;background:#F5F8FF;border-top:1px solid #E0E6F0}
+.sum-box{background:#fff;border:1px solid #DDE3EA;border-radius:8px;padding:.6rem .7rem}
+.sum-icon{font-size:16px;margin-bottom:.25rem}
+.sum-title{font-size:11px;font-weight:600;color:#0D3B6E;margin-bottom:.2rem}
+.sum-text{font-size:10px;color:#555;line-height:1.5}
+
+.sys-badge{display:inline-flex;align-items:center;gap:.3rem;background:#0D3B6E;color:#7EC8F0;font-size:9.5px;padding:2px 8px;border-radius:10px;margin-bottom:.35rem}
+</style>
+
+<h2 class="sr-only">การไหลของข้อมูล กพร. ตั้งแต่ต้นน้ำ (ผู้ประกอบการ) ถึงปลายน้ำ (ผู้บริหาร) ผ่าน สอจ. สรข. และหน่วยงานภายใน กพร.</h2>
+
+<div class="page">
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-tag">กรมอุตสาหกรรมพื้นฐานและการเหมืองแร่ · DPIM</div>
+  <div class="hdr-title">กระแสข้อมูล กพร. : ต้นน้ำ → ปลายน้ำ</div>
+  <div class="hdr-sub">ผู้ประกอบการ → สอจ. → สรข. (8 เขต) → กวบ. → ศสท. → กยผ. → ผู้บริหาร</div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="leg"><div class="leg-dot" style="background:#FFECB3;border:1px solid #FFC107"></div>เอกสารกระดาษ (บังคับตาม พ.ร.บ.)</div>
+  <div class="leg"><div class="leg-dot" style="background:#BBDEFB;border:1px solid #2196F3"></div>ระบบดิจิทัล</div>
+  <div class="leg"><div class="leg-dot" style="background:#E8EAF6;border:1px solid #9C27B0"></div>ผสม (Hybrid)</div>
+  <div class="leg"><div class="leg-dot" style="background:#FFCDD2;border:1px solid #F44336"></div>จุดเจ็บปวด / ช่องว่าง</div>
+  <div class="leg"><div class="leg-dot" style="background:#C8E6C9;border:1px solid #4CAF50"></div>เป้าหมาย Digital</div>
+</div>
+
+<div class="two-col">
+<div><!-- LEFT: MAIN FLOW -->
+
+<!-- ===================== S1: ผู้ประกอบการ ===================== -->
+<div class="stage">
+  <div class="stage-label">
+    <div class="slabel">ต้นน้ำ</div>
+    <div class="ssub">ผู้ประกอบการ</div>
+  </div>
+  <div class="stage-body">
+    <div class="actor c-blue-dark">
+      <div class="actor-name" style="color:#0D3B6E">ผู้ประกอบการ / นักลงทุน</div>
+      <div class="actor-desc">ลงทะเบียนขอใบอนุญาตสำรวจหรือทำเหมืองแร่ในพื้นที่เป้าหมาย</div>
+      <div class="tags-row">
+        <span class="tag tag-digital">i-Industry (i-Next)</span>
+        <span class="tag tag-digital">i-Single Form</span>
+        <span class="tag tag-paper">เอกสารกระดาษ</span>
+        <span class="tag tag-law">พ.ร.บ. แร่ 2560</span>
+      </div>
+      <div class="data-strip" style="margin-top:.45rem">
+        <span class="dtype">คำขออาชญาบัตร</span>
+        <span class="dtype">คำขอประทานบัตร</span>
+        <span class="dtype">รายงานธรณีวิทยา</span>
+        <span class="dtype">แผนผังโครงการ</span>
+        <span class="dtype">เอกสารสิทธิ์ที่ดิน</span>
+      </div>
+      <div class="pain">
+        <div class="pain-icon">⚠</div>
+        <div class="pain-text">บางแบบฟอร์มยังต้องยื่นกระดาษตาม พ.ร.บ. แร่ — i-Single Form รับได้บางส่วน ยังไม่ครบวงจร 100%</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="arr-down"><div style="display:flex;flex-direction:column;align-items:center"><div class="arr-line"></div><div class="arr-tip"></div></div><div class="arr-label">ยื่นคำขอ<br>+ แนบเอกสาร</div></div>
+
+<!-- ===================== S2: สอจ. ===================== -->
+<div class="stage">
+  <div class="stage-label">
+    <div class="slabel">ระดับจังหวัด</div>
+    <div class="ssub" style="color:#B71C1C;font-weight:600">สอจ.</div>
+    <div class="ssub">(สังกัด ปก.อก.)</div>
+  </div>
+  <div class="stage-body">
+    <div class="actor c-orange">
+      <div class="actor-name" style="color:#BF360C">สำนักงานอุตสาหกรรมจังหวัด (สอจ.)</div>
+      <div class="actor-desc">รับคำขอในพื้นที่ ตรวจเอกสารเบื้องต้น ออกเลขรับ ส่งต่อ สรข. ที่รับผิดชอบ</div>
+      <div class="tags-row">
+        <span class="tag tag-paper">รับกระดาษ</span>
+        <span class="tag tag-hybrid">Hybrid System</span>
+        <span class="tag tag-law">สังกัด ปก.อก. ≠ กพร.</span>
+      </div>
+      <div class="data-strip">
+        <span class="dtype">ทะเบียนรับเรื่อง</span>
+        <span class="dtype">หนังสือนำส่ง</span>
+        <span class="dtype">รายงานเบื้องต้น</span>
+      </div>
+      <div class="pain">
+        <div class="pain-icon">⚠</div>
+        <div class="pain-text"><strong>ช่องว่างระบบ:</strong> สอจ. สังกัด ปก.อก. ไม่ใช่ กพร. — การส่งต่อข้อมูลมักผ่านหนังสือราชการและกระดาษ ยังไม่มี API เชื่อมถึงกัน</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="arr-down"><div style="display:flex;flex-direction:column;align-items:center"><div class="arr-line"></div><div class="arr-tip"></div></div><div class="arr-label">ส่งต่อ สรข.<br>ที่รับผิดชอบ</div></div>
+
+<!-- ===================== S3: สรข. ===================== -->
+<div class="stage">
+  <div class="stage-label">
+    <div class="slabel">ระดับเขต</div>
+    <div class="ssub" style="color:#0D47A1;font-weight:600">สรข.</div>
+    <div class="ssub">(สังกัด กพร.)</div>
+  </div>
+  <div class="stage-body">
+    <div class="actor c-blue-dark">
+      <div class="actor-name" style="color:#0D3B6E">สำนักงานอุตสาหกรรมพื้นฐานและการเหมืองแร่เขต (สรข.) — 8 เขต</div>
+      <div class="actor-desc">ตรวจสอบเอกสาร · รังวัดกำหนดเขตพื้นที่ · ตรวจสอบพื้นที่จริง · จัดทำรายงานส่ง กพร. ส่วนกลาง</div>
+      <div class="srkh-grid" style="margin-top:.5rem">
+        <div class="srkh-box"><div class="srkh-num">สรข.1</div><div class="srkh-city">สงขลา</div><div class="srkh-region">ภาคใต้ตอนล่าง</div></div>
+        <div class="srkh-box"><div class="srkh-num">สรข.2</div><div class="srkh-city">อุดรธานี</div><div class="srkh-region">อีสานตอนบน</div></div>
+        <div class="srkh-box"><div class="srkh-num">สรข.3</div><div class="srkh-city">เชียงใหม่</div><div class="srkh-region">ภาคเหนือ</div></div>
+        <div class="srkh-box"><div class="srkh-num">สรข.4</div><div class="srkh-city">ภูเก็ต</div><div class="srkh-region">ภาคใต้ตอนบน</div></div>
+        <div class="srkh-box"><div class="srkh-num">สรข.5</div><div class="srkh-city">พิษณุโลก</div><div class="srkh-region">เหนือตอนล่าง</div></div>
+        <div class="srkh-box"><div class="srkh-num">สรข.6</div><div class="srkh-city">นครราชสีมา</div><div class="srkh-region">อีสานตอนล่าง</div></div>
+        <div class="srkh-box"><div class="srkh-num">สรข.7</div><div class="srkh-city">ราชบุรี</div><div class="srkh-region">ภาคตะวันตก-กลาง</div></div>
+        <div class="srkh-box"><div class="srkh-num">สรข.8</div><div class="srkh-city">ชลบุรี</div><div class="srkh-region">ภาคตะวันออก</div></div>
+      </div>
+      <div class="data-strip" style="margin-top:.45rem">
+        <span class="dtype">รายงานรังวัด</span>
+        <span class="dtype">บันทึกตรวจพื้นที่</span>
+        <span class="dtype">ความเห็น สรข.</span>
+        <span class="dtype">ข้อมูล GIS</span>
+        <span class="dtype">รายงาน EIA เบื้องต้น</span>
+      </div>
+      <div class="pain">
+        <div class="pain-icon">⚠</div>
+        <div class="pain-text">ข้อมูลแต่ละ สรข. ยังไม่ได้รับการรวมศูนย์ — format ต่างกัน รายงานส่วนใหญ่ยังเป็น PDF/กระดาษ ยังไม่มีมาตรฐาน Data Field เดียวกัน</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="arr-down"><div style="display:flex;flex-direction:column;align-items:center"><div class="arr-line"></div><div class="arr-tip"></div></div><div class="arr-label">เรื่อง+รายงาน<br>ส่ง กพร. กลาง</div></div>
+
+<!-- ===================== S4: กวบ. ===================== -->
+<div class="stage">
+  <div class="stage-label">
+    <div class="slabel">กพร. ส่วนกลาง</div>
+    <div class="ssub" style="color:#00695C;font-weight:600">กวบ.</div>
+    <div class="ssub">กองวิศวกรรมบริการ</div>
+  </div>
+  <div class="stage-body">
+    <div class="actor c-teal">
+      <div class="actor-name" style="color:#00695C">กองวิศวกรรมบริการ (กวบ.)</div>
+      <div class="actor-desc">พิจารณาทางวิศวกรรม · ตรวจแผนผังเหมือง · กำหนดเงื่อนไข · ออกใบอนุญาต (อาชญาบัตร/ประทานบัตร) · กำกับดูแล</div>
+      <div class="tags-row">
+        <span class="tag tag-paper">ต้นฉบับกระดาษ (พ.ร.บ.)</span>
+        <span class="tag tag-digital">ระบบฐานข้อมูลภายใน</span>
+        <span class="tag tag-law">อำนาจอธิบดี</span>
+      </div>
+      <div class="data-strip">
+        <span class="dtype">ใบอนุญาตอาชญาบัตร</span>
+        <span class="dtype">ประทานบัตร</span>
+        <span class="dtype">เงื่อนไขการทำเหมือง</span>
+        <span class="dtype">รายงาน EIA ฉบับสมบูรณ์</span>
+        <span class="dtype">แผนผังเหมือง</span>
+        <span class="dtype">ค่าภาคหลวงแร่</span>
+      </div>
+      <div class="pain">
+        <div class="pain-icon">⚠</div>
+        <div class="pain-text">ประทานบัตรฉบับจริงต้องพิมพ์บนกระดาษและลงนาม — กฎหมายกำหนด ยังไม่สามารถเป็น e-Document เต็มรูปแบบ</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="arr-down"><div style="display:flex;flex-direction:column;align-items:center"><div class="arr-line"></div><div class="arr-tip"></div></div><div class="arr-label">ส่งข้อมูล<br>ให้ ศสท. / กยผ.</div></div>
+
+<!-- ===================== S5: ศสท. ===================== -->
+<div class="stage">
+  <div class="stage-label">
+    <div class="slabel">IT &amp; ข้อมูล</div>
+    <div class="ssub" style="color:#6A1B9A;font-weight:600">ศสท.</div>
+    <div class="ssub">ศูนย์สารสนเทศ</div>
+  </div>
+  <div class="stage-body">
+    <div class="actor c-purple">
+      <div class="actor-name" style="color:#6A1B9A">ศูนย์สารสนเทศและเทคโนโลยี (ศสท.)</div>
+      <div class="actor-desc">รวบรวมข้อมูลจากทุกกอง · ดูแลระบบ IT · GIS · ฐานข้อมูลใบอนุญาต · ต้องการ Dashboard real-time</div>
+      <div class="data-strip">
+        <span class="dtype">ฐานข้อมูลประทานบัตร</span>
+        <span class="dtype">GIS พื้นที่เหมือง</span>
+        <span class="dtype">สถิติการผลิตแร่</span>
+        <span class="dtype">ข้อมูลคนงาน</span>
+        <span class="dtype">ค่าภาคหลวง</span>
+        <span class="dtype">รายงาน EIA</span>
+      </div>
+      <div class="pain">
+        <div class="pain-icon">⚠</div>
+        <div class="pain-text"><strong>Pain Point หลัก:</strong> ข้อมูลมาจากหลายระบบ / หลายรูปแบบ (Excel, PDF, กระดาษ) — ยังไม่สามารถทำ real-time dashboard ได้ครบ เพราะ data source ยังไม่ standardize</div>
+      </div>
+      <div class="desired">
+        <div class="desired-icon">★</div>
+        <div class="desired-text"><strong>เป้าหมาย:</strong> Dashboard real-time แสดงสถิติ: จำนวนใบอนุญาต · ปริมาณการผลิตแร่ · แผนที่เหมือง · ค่าภาคหลวง · ตัวชี้วัด ESG — เชื่อมกับ กวบ./สรข. อัตโนมัติ</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="arr-down"><div style="display:flex;flex-direction:column;align-items:center"><div class="arr-line"></div><div class="arr-tip"></div></div><div class="arr-label">ข้อมูลเชิง<br>วิเคราะห์</div></div>
+
+<!-- ===================== S6: กยผ. ===================== -->
+<div class="stage">
+  <div class="stage-label">
+    <div class="slabel">วางแผน</div>
+    <div class="ssub" style="color:#2E7D32;font-weight:600">กยผ.</div>
+    <div class="ssub">กองยุทธศาสตร์</div>
+  </div>
+  <div class="stage-body">
+    <div class="actor c-green">
+      <div class="actor-name" style="color:#1B5E20">กองยุทธศาสตร์และแผนงาน (กยผ.)</div>
+      <div class="actor-desc">นำข้อมูลจาก ศสท./กวบ. มาวิเคราะห์ · จัดทำแผนยุทธศาสตร์กพร. · งบประมาณ · ตัวชี้วัดองค์กร</div>
+      <div class="tags-row">
+        <span class="tag tag-data">วิเคราะห์เชิงนโยบาย</span>
+        <span class="tag tag-digital">AI / Data Analysis (เป้าหมาย)</span>
+      </div>
+      <div class="data-strip">
+        <span class="dtype">สถิติภาคอุตสาหกรรมแร่</span>
+        <span class="dtype">แนวโน้มตลาด</span>
+        <span class="dtype">ตัวชี้วัด KPI</span>
+        <span class="dtype">แผนแม่บทแร่</span>
+        <span class="dtype">Critical Minerals</span>
+      </div>
+      <div class="desired">
+        <div class="desired-icon">★</div>
+        <div class="desired-text"><strong>เป้าหมาย:</strong> AI/ML วิเคราะห์แนวโน้มแหล่งแร่ · ทำนายความต้องการตลาด · วิเคราะห์ความเสี่ยง · เชื่อมกับข้อมูล Global Critical Minerals Strategy</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="arr-down"><div style="display:flex;flex-direction:column;align-items:center"><div class="arr-line"></div><div class="arr-tip"></div></div><div class="arr-label">รายงาน<br>เชิงนโยบาย</div></div>
+
+<!-- ===================== S7: ผู้บริหาร ===================== -->
+<div class="stage">
+  <div class="stage-label">
+    <div class="slabel">ปลายน้ำ</div>
+    <div class="ssub" style="color:#BF360C;font-weight:600">ผู้บริหาร</div>
+    <div class="ssub">อธิบดี / รมต.</div>
+  </div>
+  <div class="stage-body">
+    <div class="actor c-red-soft" style="border-color:#EF9A9A">
+      <div class="actor-name" style="color:#B71C1C">ผู้บริหาร กพร. และรัฐมนตรี</div>
+      <div class="actor-desc">ใช้ข้อมูลตัดสินใจเชิงนโยบาย · รายงานคณะรัฐมนตรี · กำหนดทิศทางเหมืองแร่ไทย</div>
+      <div class="data-strip">
+        <span class="dtype">สรุปผลการดำเนินงาน</span>
+        <span class="dtype">รายงานงบประมาณ</span>
+        <span class="dtype">แผนนโยบายแร่ชาติ</span>
+        <span class="dtype">รายงาน ครม.</span>
+        <span class="dtype">Critical Minerals Policy</span>
+      </div>
+      <div class="desired">
+        <div class="desired-icon">★</div>
+        <div class="desired-text"><strong>ต้องการ:</strong> Executive Dashboard ที่เห็นภาพรวมประทานบัตร / รายได้ค่าภาคหลวง / ESG compliance / ตัวชี้วัดสำคัญ แบบ real-time ทุก สรข.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end left column -->
+
+<!-- RIGHT PANEL -->
+<div class="right-panel">
+  <div class="rp-section">
+    <div class="rp-title">ระบบที่เกี่ยวข้อง</div>
+    <div style="display:flex;flex-direction:column;gap:.4rem">
+      <div style="background:#E3F2FD;border:1px solid #90CAF9;border-radius:6px;padding:.45rem .55rem">
+        <div style="font-size:10px;font-weight:700;color:#0D47A1">i-Industry / i-Single Form</div>
+        <div style="font-size:9.5px;color:#444;margin-top:.2rem;line-height:1.4">ระบบ กระทรวงอุตสาหกรรม ผู้ประกอบการ ลงทะเบียนและยื่นคำขอใบอนุญาต online</div>
+        <div style="font-size:9px;color:#1565C0;margin-top:.2rem">i-next.industry.go.th</div>
+      </div>
+      <div style="background:#E8F5E9;border:1px solid #A5D6A7;border-radius:6px;padding:.45rem .55rem">
+        <div style="font-size:10px;font-weight:700;color:#1B5E20">ระบบ e-Mining / GIS กพร.</div>
+        <div style="font-size:9.5px;color:#444;margin-top:.2rem;line-height:1.4">แผนที่แหล่งแร่ พิกัด GIS ขอบเขตประทานบัตร ข้อมูลธรณีวิทยา</div>
+      </div>
+      <div style="background:#FFF3E0;border:1px solid #FFCC80;border-radius:6px;padding:.45rem .55rem">
+        <div style="font-size:10px;font-weight:700;color:#BF360C">ระบบ EIA / สผ.</div>
+        <div style="font-size:9.5px;color:#444;margin-top:.2rem;line-height:1.4">รายงานผลกระทบสิ่งแวดล้อม เชื่อมกับ สผ. ต้องมีก่อนออกประทานบัตร</div>
+      </div>
+      <div style="background:#F3E5F5;border:1px solid #CE93D8;border-radius:6px;padding:.45rem .55rem">
+        <div style="font-size:10px;font-weight:700;color:#6A1B9A">ระบบภายใน กพร.</div>
+        <div style="font-size:9.5px;color:#444;margin-top:.2rem;line-height:1.4">ฐานข้อมูลใบอนุญาต · ทะเบียนประทานบัตร · ระบบติดตามค่าภาคหลวง</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rp-section">
+    <div class="rp-title">ประเภทข้อมูลหลัก</div>
+    <div style="display:flex;flex-direction:column;gap:.3rem;font-size:10px;color:#333;line-height:1.6">
+      <div style="display:flex;gap:.35rem;align-items:flex-start"><span style="color:#0D6EFD;font-size:12px;flex-shrink:0">◆</span><span><strong>ใบอนุญาต</strong><br>อาชญาบัตร / ประทานบัตร</span></div>
+      <div style="display:flex;gap:.35rem;align-items:flex-start"><span style="color:#0D6EFD;font-size:12px;flex-shrink:0">◆</span><span><strong>ภูมิสารสนเทศ</strong><br>GIS / พิกัด / แผนที่แร่</span></div>
+      <div style="display:flex;gap:.35rem;align-items:flex-start"><span style="color:#0D6EFD;font-size:12px;flex-shrink:0">◆</span><span><strong>การผลิต</strong><br>ปริมาณแร่ / รายงานรายเดือน</span></div>
+      <div style="display:flex;gap:.35rem;align-items:flex-start"><span style="color:#0D6EFD;font-size:12px;flex-shrink:0">◆</span><span><strong>การเงิน</strong><br>ค่าภาคหลวงแร่ / รายได้</span></div>
+      <div style="display:flex;gap:.35rem;align-items:flex-start"><span style="color:#0D6EFD;font-size:12px;flex-shrink:0">◆</span><span><strong>สิ่งแวดล้อม</strong><br>EIA / มาตรการฟื้นฟู</span></div>
+      <div style="display:flex;gap:.35rem;align-items:flex-start"><span style="color:#0D6EFD;font-size:12px;flex-shrink:0">◆</span><span><strong>แรงงาน</strong><br>จำนวนคนงาน / ความปลอดภัย</span></div>
+      <div style="display:flex;gap:.35rem;align-items:flex-start"><span style="color:#0D6EFD;font-size:12px;flex-shrink:0">◆</span><span><strong>ชนิดแร่</strong><br>ยิปซัม / หิน / ลิเทียม / ดีบุก ฯลฯ</span></div>
+    </div>
+  </div>
+
+  <div class="rp-section">
+    <div class="rp-title">กฎหมายที่บังคับรูปแบบ</div>
+    <div style="display:flex;flex-direction:column;gap:.3rem">
+      <div style="background:#FFEBEE;border-radius:5px;padding:.35rem .5rem;font-size:9.5px;color:#B71C1C;line-height:1.4"><strong>พ.ร.บ. แร่ 2560</strong> — กำหนดว่าประทานบัตรต้องพิมพ์บนกระดาษ ลงนามอธิบดี</div>
+      <div style="background:#FFEBEE;border-radius:5px;padding:.35rem .5rem;font-size:9.5px;color:#B71C1C;line-height:1.4"><strong>พ.ร.บ. ข้อมูลข่าวสาร 2540</strong> — กำหนดการเผยแพร่ข้อมูลสาธารณะ</div>
+      <div style="background:#FFEBEE;border-radius:5px;padding:.35rem .5rem;font-size:9.5px;color:#B71C1C;line-height:1.4"><strong>PDPA 2562</strong> — คุ้มครองข้อมูลส่วนบุคคลผู้ประกอบการ</div>
+      <div style="background:#FFEBEE;border-radius:5px;padding:.35rem .5rem;font-size:9.5px;color:#B71C1C;line-height:1.4"><strong>พ.ร.บ. EIA</strong> (สผ.) — รายงานผลกระทบ สิ่งแวดล้อมต้องเป็นรูปแบบกำหนด</div>
+    </div>
+  </div>
+
+  <div class="rp-section">
+    <div class="rp-title">โอกาส Digital ที่ต้องการ</div>
+    <div style="display:flex;flex-direction:column;gap:.3rem">
+      <div style="background:#E8F5E9;border-radius:5px;padding:.35rem .5rem;font-size:9.5px;color:#1B5E20;line-height:1.4">🎯 <strong>ศสท.:</strong> Dashboard real-time ครอบคลุม 8 สรข.</div>
+      <div style="background:#E8F5E9;border-radius:5px;padding:.35rem .5rem;font-size:9.5px;color:#1B5E20;line-height:1.4">🎯 <strong>กยผ.:</strong> AI วิเคราะห์แนวโน้มแร่ / Predictive analytics</div>
+      <div style="background:#E8F5E9;border-radius:5px;padding:.35rem .5rem;font-size:9.5px;color:#1B5E20;line-height:1.4">🎯 <strong>กวบ.:</strong> Digital workflow ลดขั้นตอนกระดาษ</div>
+      <div style="background:#E8F5E9;border-radius:5px;padding:.35rem .5rem;font-size:9.5px;color:#1B5E20;line-height:1.4">🎯 <strong>ผู้บริหาร:</strong> Executive dashboard พร้อมรายงาน ครม.</div>
+    </div>
+  </div>
+</div><!-- end right panel -->
+</div><!-- end two-col -->
+
+<!-- SUMMARY BOTTOM -->
+<div class="summary">
+  <div class="sum-box">
+    <div class="sum-icon">⚡</div>
+    <div class="sum-title">ปัญหาหลักของข้อมูล</div>
+    <div class="sum-text">ข้อมูลกระจาย · รูปแบบไม่มาตรฐาน · กระดาษ+ดิจิทัลผสม · ขาด API เชื่อมระหว่างหน่วยงาน · ยังไม่ real-time</div>
+  </div>
+  <div class="sum-box">
+    <div class="sum-icon">🔗</div>
+    <div class="sum-title">จุดเชื่อมที่ต้องพัฒนา</div>
+    <div class="sum-text">สอจ. (ปก.อก.) ↔ สรข. (กพร.) · สรข. ↔ กวบ. · กวบ. ↔ ศสท. ↔ กยผ. — ต้องมี Data Pipeline อัตโนมัติ</div>
+  </div>
+  <div class="sum-box">
+    <div class="sum-icon">🚀</div>
+    <div class="sum-title">เป้าหมาย Data Governance</div>
+    <div class="sum-text">Single Source of Truth · Metadata มาตรฐาน · Dashboard ผู้บริหาร · AI/Analytics · ลดการกรอกซ้ำ ลดกระดาษ</div>
+  </div>
+</div>
+
+</div>

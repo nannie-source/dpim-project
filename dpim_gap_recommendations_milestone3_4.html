@@ -1,0 +1,429 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Sarabun',system-ui,sans-serif}
+.pg{background:#fff;width:100%;padding-bottom:2rem}
+/* HEADER */
+.hdr{background:linear-gradient(135deg,#0D3B6E 0%,#1565C0 100%);padding:1.2rem 1.4rem}
+.hdr-eyebrow{font-size:10px;letter-spacing:.12em;color:#90CAF9;margin-bottom:.3rem;text-transform:uppercase}
+.hdr-title{font-size:20px;font-weight:700;color:#fff;line-height:1.3}
+.hdr-sub{font-size:12px;color:#BBDEFB;margin-top:.3rem}
+.hdr-badges{display:flex;gap:.5rem;margin-top:.7rem;flex-wrap:wrap}
+.hbadge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:10px;padding:2px 10px;border-radius:20px}
+
+/* SECTION TITLES */
+.sec{padding:.8rem 1rem .5rem}
+.sec-t{font-size:11px;font-weight:700;color:#0D3B6E;text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:.5rem;padding-bottom:.5rem;border-bottom:2px solid #E8F0FE;margin-bottom:.7rem}
+.sec-t::before{content:'';display:block;width:4px;height:16px;background:#1565C0;border-radius:2px;flex-shrink:0}
+.divider{height:1px;background:#EEE;margin:.1rem 1rem}
+
+/* GAP CARDS */
+.gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}
+.gap-card{border-radius:8px;border:1px solid transparent;padding:.65rem .75rem}
+.gap-card .gc-hdr{display:flex;align-items:center;gap:.45rem;margin-bottom:.45rem}
+.gc-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.gc-title{font-size:11.5px;font-weight:700;line-height:1.3}
+.gc-items{display:flex;flex-direction:column;gap:.3rem}
+.gc-item{font-size:10.5px;color:#444;line-height:1.5;display:flex;gap:.35rem;align-items:flex-start}
+.gc-item::before{content:'▸';color:#DC3545;font-size:10px;flex-shrink:0;margin-top:1px}
+/* gap colors */
+.g-red{background:#FFF5F5;border-color:#FFCDD2}.g-red .gc-title{color:#B71C1C}.g-red .gc-icon{background:#FFCDD2}
+.g-orange{background:#FFF8F0;border-color:#FFCC80}.g-orange .gc-title{color:#BF360C}.g-orange .gc-icon{background:#FFE0B2}
+.g-purple{background:#F8F4FE;border-color:#CE93D8}.g-purple .gc-title{color:#4A148C}.g-purple .gc-icon{background:#E1BEE7}
+.g-teal{background:#E0F7FA;border-color:#80DEEA}.g-teal .gc-title{color:#00695C}.g-teal .gc-icon{background:#B2EBF2}
+
+/* LAW GAP */
+.law-strip{background:#FFF3E0;border:1px solid #FFB74D;border-radius:8px;padding:.65rem .8rem;margin:.5rem 0}
+.law-strip-t{font-size:11px;font-weight:700;color:#BF360C;display:flex;align-items:center;gap:.4rem;margin-bottom:.5rem}
+.law-items{display:grid;grid-template-columns:1fr 1fr;gap:.3rem .8rem}
+.law-item{font-size:10.5px;color:#555;line-height:1.5;display:flex;gap:.3rem;align-items:flex-start}
+.law-item::before{content:'⚠';font-size:10px;flex-shrink:0}
+
+/* MILESTONE SECTION */
+.ms-wrap{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
+.ms-card{border-radius:10px;border:2px solid transparent;padding:.8rem .85rem}
+.ms3{background:#E3F2FD;border-color:#1565C0}
+.ms4{background:#E8F5E9;border-color:#2E7D32}
+.ms-hdr{display:flex;align-items:center;gap:.5rem;margin-bottom:.65rem}
+.ms-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;flex-shrink:0}
+.ms3 .ms-badge{background:#1565C0;color:#fff}
+.ms4 .ms-badge{background:#2E7D32;color:#fff}
+.ms-title{font-size:12px;font-weight:700;line-height:1.3}
+.ms3 .ms-title{color:#0D3B6E}
+.ms4 .ms-title{color:#1B5E20}
+.ms-items{display:flex;flex-direction:column;gap:.4rem}
+.ms-item{border-radius:6px;padding:.5rem .6rem;display:flex;gap:.4rem;align-items:flex-start}
+.ms3 .ms-item{background:#BBDEFB}
+.ms4 .ms-item{background:#C8E6C9}
+.ms-num{font-size:9px;font-weight:700;padding:2px 6px;border-radius:10px;flex-shrink:0;margin-top:1px}
+.ms3 .ms-num{background:#1565C0;color:#fff}
+.ms4 .ms-num{background:#2E7D32;color:#fff}
+.ms-text{font-size:10.5px;line-height:1.5}
+.ms3 .ms-text{color:#0D3B6E}
+.ms4 .ms-text{color:#1B5E20}
+
+/* GOVERNANCE COUNCIL */
+.council{background:#F5F0FF;border:1px solid #B39DDB;border-radius:10px;padding:.75rem .9rem;margin:.5rem 0}
+.council-t{font-size:12px;font-weight:700;color:#4A148C;display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem}
+.council-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem}
+.council-role{background:#fff;border:1px solid #CE93D8;border-radius:7px;padding:.45rem .5rem;text-align:center}
+.cr-title{font-size:10px;font-weight:700;color:#4A148C;margin-bottom:.2rem}
+.cr-who{font-size:9.5px;color:#555;line-height:1.4}
+
+/* ROADMAP */
+.roadmap{display:flex;flex-direction:column;gap:.4rem}
+.rm-row{display:grid;grid-template-columns:90px 1fr;gap:.5rem;align-items:center}
+.rm-phase{font-size:10px;font-weight:700;text-align:center;padding:.35rem .4rem;border-radius:6px}
+.rm-p1{background:#E3F2FD;color:#0D3B6E;border:1px solid #90CAF9}
+.rm-p2{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.rm-p3{background:#FFF3E0;color:#BF360C;border:1px solid #FFCC80}
+.rm-p4{background:#F3E5F5;color:#4A148C;border:1px solid #CE93D8}
+.rm-content{display:flex;flex-wrap:wrap;gap:.3rem}
+.rm-task{font-size:9.5px;background:#F5F7FA;border:1px solid #DDE3EA;border-radius:10px;padding:2px 8px;color:#333}
+
+/* PRIORITY TABLE */
+.ptable{width:100%;border-collapse:collapse;font-size:10.5px}
+.ptable th{background:#0D3B6E;color:#fff;padding:.4rem .6rem;font-weight:600;text-align:left;font-size:10px}
+.ptable td{padding:.4rem .6rem;border-bottom:1px solid #EEE;vertical-align:top;color:#333;line-height:1.5}
+.ptable tr:nth-child(even) td{background:#F8FAFF}
+.p-high{background:#FFEBEE!important}.p-mid{background:#FFF8E1!important}.p-low{background:#E8F5E9!important}
+.pill{display:inline-block;font-size:9px;padding:1px 7px;border-radius:10px;font-weight:600}
+.pill-h{background:#FFCDD2;color:#B71C1C}
+.pill-m{background:#FFE0B2;color:#BF360C}
+.pill-l{background:#C8E6C9;color:#1B5E20}
+
+/* FOOTER NOTE */
+.fnote{margin:.75rem 1rem 0;background:#E8F0FE;border-left:4px solid #1565C0;border-radius:0 6px 6px 0;padding:.6rem .8rem}
+.fnote p{font-size:10.5px;color:#1a1a1a;line-height:1.7}
+.fnote strong{color:#0D3B6E}
+</style>
+
+<h2 class="sr-only">ข้อเสนอแนะยกระดับ Data Governance กพร. เตรียมสู่งวดที่ 3 (Data Architecture) และงวดที่ 4 (Data Governance Framework) พร้อมช่องว่างด้านกฎหมาย การจัดการข้อมูล และเทคโนโลยี</h2>
+
+<div class="pg">
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-eyebrow">TOR โครงการธรรมาภิบาลข้อมูล · กพร. / DPIM</div>
+  <div class="hdr-title">ข้อเสนอแนะและแนวทางยกระดับ<br>เตรียมสู่งวดที่ 3–4 : Data Architecture & Governance</div>
+  <div class="hdr-sub">Gap Analysis → แนวทางปิดช่องว่าง → โครงสร้าง Council → Roadmap ปฏิบัติ</div>
+  <div class="hdr-badges">
+    <span class="hbadge">งวด 3: สถาปัตยกรรมข้อมูล (วันที่ 150)</span>
+    <span class="hbadge">งวด 4: กรอบธรรมาภิบาล (วันที่ 240)</span>
+    <span class="hbadge">270 วัน · 2,841,900 บาท</span>
+  </div>
+</div>
+
+<!-- ========== SECTION 1: GAP ANALYSIS ========== -->
+<div class="sec">
+  <div class="sec-t">ช่องว่างหลัก 4 มิติ ที่ต้องปิดก่อนงวด 3–4</div>
+  <div class="gap-grid">
+
+    <div class="gap-card g-red">
+      <div class="gc-hdr">
+        <div class="gc-icon">📋</div>
+        <div class="gc-title">ช่องว่างการจัดการ & คุณภาพข้อมูล<br><span style="font-size:9.5px;font-weight:400;color:#888">(Data Management & Quality Gaps)</span></div>
+      </div>
+      <div class="gc-items">
+        <div class="gc-item">ไม่มี Data Dictionary / Data Definition กลางที่ใช้ร่วมกันทุกกอง — นิยามข้อมูลต่างกันระหว่าง กวบ./ศสท./สรข.</div>
+        <div class="gc-item">ข้อมูลซ้ำซ้อน (Redundancy) เช่น ข้อมูลประทานบัตรถูกบันทึกทั้งในกระดาษ Excel และระบบฐานข้อมูล</div>
+        <div class="gc-item">ขาดมาตรฐาน Data Quality (ความครบถ้วน ความถูกต้อง ความเป็นปัจจุบัน) — ยังไม่มี KPI คุณภาพข้อมูล</div>
+        <div class="gc-item">ไม่มีกระบวนการ Data Lifecycle อย่างเป็นทางการ — ไม่ชัดเจนว่าข้อมูลใดควรเก็บ/ทำลาย/เก็บถาวร</div>
+        <div class="gc-item">ขาด Data Owner / Data Steward ที่ชัดเจนในแต่ละชุดข้อมูล</div>
+        <div class="gc-item">ข้อมูลจาก สรข. 8 เขต มาในรูปแบบที่ไม่มาตรฐาน — ยากต่อการรวมศูนย์</div>
+      </div>
+    </div>
+
+    <div class="gap-card g-purple">
+      <div class="gc-hdr">
+        <div class="gc-icon">🏗</div>
+        <div class="gc-title">ช่องว่างเทคโนโลยี & สถาปัตยกรรม<br><span style="font-size:9.5px;font-weight:400;color:#888">(Technology & Architecture Gaps)</span></div>
+      </div>
+      <div class="gc-items">
+        <div class="gc-item">ไม่มี Data Architecture ระดับองค์กร — แต่ละระบบ (GIS, e-Mining, EIA) ถูกสร้างแยกส่วน ไม่ interconnect</div>
+        <div class="gc-item">ขาด API มาตรฐานสำหรับเชื่อมระหว่าง สอจ. (ปก.อก.) กับ สรข./กพร. — ข้อมูลต้องส่งผ่านหนังสือราชการ</div>
+        <div class="gc-item">ไม่มี Data Catalog หรือ Metadata Repository กลาง — ไม่รู้ว่ามีข้อมูลอะไรอยู่ที่ไหนบ้าง</div>
+        <div class="gc-item">ระบบฐานข้อมูลหลายระบบ ไม่มี Master Data Management (MDM) — ข้อมูลเดียวกันต่างกันในแต่ละระบบ</div>
+        <div class="gc-item">ยังไม่มี Data Pipeline อัตโนมัติ — Dashboard ทำจาก Export ด้วยมือ ไม่ real-time</div>
+        <div class="gc-item">Infrastructure ไม่รองรับ Big Data / AI Analytics ในอนาคต</div>
+      </div>
+    </div>
+
+    <div class="gap-card g-orange">
+      <div class="gc-hdr">
+        <div class="gc-icon">⚖</div>
+        <div class="gc-title">ช่องว่างด้านกฎหมาย & การปฏิบัติ<br><span style="font-size:9.5px;font-weight:400;color:#888">(Legal & Compliance Gaps)</span></div>
+      </div>
+      <div class="gc-items">
+        <div class="gc-item">พ.ร.บ. แร่ 2560 กำหนดให้ประทานบัตรเป็นกระดาษ — แต่ไม่มีแนวปฏิบัติการจัดการข้อมูลดิจิทัลคู่ขนาน</div>
+        <div class="gc-item">PDPA 2562 มีผล แต่กพร. ยังไม่มี Data Classification Standard ชัดเจน ว่าข้อมูลใดเป็น PII</div>
+        <div class="gc-item">พ.ร.บ. รัฐบาลดิจิทัล 2562 กำหนดให้เชื่อมข้อมูลรัฐ — แต่ยังไม่มี Interoperability Standard กับหน่วยงานอื่น</div>
+        <div class="gc-item">ยังไม่มีนโยบาย Data Retention & Disposal ที่สอดคล้องกับกฎหมาย</div>
+        <div class="gc-item">กรอบ DG Framework (สพร.) ยังไม่ถูก implement — มีเฉพาะในรูปแบบเอกสาร ไม่ได้ปฏิบัติจริง</div>
+      </div>
+    </div>
+
+    <div class="gap-card g-teal">
+      <div class="gc-hdr">
+        <div class="gc-icon">👥</div>
+        <div class="gc-title">ช่องว่างด้านคน & กระบวนการ<br><span style="font-size:9.5px;font-weight:400;color:#888">(People & Process Gaps)</span></div>
+      </div>
+      <div class="gc-items">
+        <div class="gc-item">ไม่มีโครงสร้าง Data Governance Council / คณะกรรมการกำกับดูแลข้อมูลอย่างเป็นทางการ</div>
+        <div class="gc-item">ยังไม่มีตำแหน่ง CDO / Data Steward / Data Owner ที่ถูก assign อย่างชัดเจน</div>
+        <div class="gc-item">บุคลากรขาดความรู้ด้าน Data Governance — ยังไม่มีการอบรมหรือ awareness program</div>
+        <div class="gc-item">กระบวนการทำงานยังเป็น manual — ขาด SOP ที่ระบุว่าข้อมูลไหล/ตรวจ/อนุมัติอย่างไร</div>
+        <div class="gc-item">การสื่อสารระหว่างหน่วยงาน (สอจ.–สรข.–กวบ.–ศสท.) ยังไม่มีช่องทางแลกเปลี่ยนข้อมูลมาตรฐาน</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- LAW GAP DETAIL -->
+<div class="sec" style="padding-top:.3rem">
+  <div class="law-strip">
+    <div class="law-strip-t">⚖ ช่องว่างกฎหมาย — มีกำหนดในกฎหมาย แต่ยังขาดการนำไปปฏิบัติจริง</div>
+    <div class="law-items">
+      <div class="law-item"><strong>พ.ร.บ. แร่ 2560</strong> — บังคับกระดาษ แต่ไม่ห้ามมีระบบดิจิทัลคู่ขนาน → ต้องออกแบบ Hybrid Model</div>
+      <div class="law-item"><strong>PDPA 2562</strong> — ต้องมี Data Classification + Consent Management แต่ยังไม่มี Policy</div>
+      <div class="law-item"><strong>พ.ร.บ. ดิจิทัล 2562</strong> — บังคับเชื่อมข้อมูล แต่ยังไม่มี API / Interoperability กับ สอจ./กพส.</div>
+      <div class="law-item"><strong>พ.ร.บ. ข้อมูลข่าวสาร 2540</strong> — กำหนดสิ่งที่ต้องเปิดเผย แต่ยังไม่มี Open Data Policy ชัดเจน</div>
+      <div class="law-item"><strong>พ.ร.บ. ไซเบอร์ 2562</strong> — ต้องมี Data Security Policy แต่ยังไม่มีมาตรฐานความปลอดภัยข้อมูล</div>
+      <div class="law-item"><strong>กรอบ DGA / สพร.</strong> — มีคู่มือ DG Framework แต่ กพร. ยังไม่ได้ adopt อย่างเป็นทางการ</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 2: DG COUNCIL ========== -->
+<div class="sec">
+  <div class="sec-t">ข้อเสนอแนะที่ 1 : จัดตั้ง Data Governance Council (DGC) ก่อนงวด 3</div>
+  <div class="council">
+    <div class="council-t">🏛 โครงสร้างคณะกรรมการกำกับดูแลข้อมูล (Data Governance Council) กพร.</div>
+    <div class="council-grid">
+      <div class="council-role">
+        <div class="cr-title">ประธาน DGC</div>
+        <div class="cr-who">รองอธิบดี / ผู้บริหาร<br>กำหนดนโยบายระดับสูง</div>
+      </div>
+      <div class="council-role">
+        <div class="cr-title">CDO / เลขาฯ DGC</div>
+        <div class="cr-who">ผอ. ศสท.<br>กำกับติดตามทั้งระบบ</div>
+      </div>
+      <div class="council-role">
+        <div class="cr-title">กรรมการ (หน่วยงาน)</div>
+        <div class="cr-who">กวบ. · กยผ. · กบส.<br>ตัวแทนแต่ละกอง</div>
+      </div>
+      <div class="council-role">
+        <div class="cr-title">Data Owner</div>
+        <div class="cr-who">เจ้าของชุดข้อมูลหลัก<br>รับผิดชอบคุณภาพ</div>
+      </div>
+      <div class="council-role">
+        <div class="cr-title">Data Steward</div>
+        <div class="cr-who">ผู้ดูแลข้อมูลรายวัน<br>ตรวจสอบมาตรฐาน</div>
+      </div>
+      <div class="council-role">
+        <div class="cr-title">ตัวแทน สรข. 8 เขต</div>
+        <div class="cr-who">เชื่อมส่วนภูมิภาค<br>รายงานคุณภาพข้อมูล</div>
+      </div>
+    </div>
+    <div style="margin-top:.55rem;font-size:10px;color:#4A148C;background:#EDE7F6;padding:.4rem .6rem;border-radius:5px;line-height:1.6">
+      <strong>บทบาทหลัก DGC:</strong> กำหนดนโยบายข้อมูล · อนุมัติมาตรฐาน · แก้ไขข้อขัดแย้งด้านข้อมูล · ติดตาม KPI คุณภาพ · รายงานผู้บริหารสูงสุด — ประชุมอย่างน้อยทุก 3 เดือน
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 3: RECOMMENDATIONS FOR MILESTONE 3 & 4 ========== -->
+<div class="sec">
+  <div class="sec-t">ข้อเสนอแนะเพื่อเตรียมงวดที่ 3 และ 4</div>
+  <div class="ms-wrap">
+
+    <!-- MILESTONE 3 -->
+    <div class="ms-card ms3">
+      <div class="ms-hdr">
+        <div class="ms-badge">งวด 3</div>
+        <div class="ms-title">สถาปัตยกรรมข้อมูล (Data Architecture)<br><span style="font-size:9.5px;font-weight:400">ส่งมอบภายในวันที่ 150 · 30% ของวงเงิน</span></div>
+      </div>
+      <div class="ms-items">
+        <div class="ms-item">
+          <div class="ms-num">A1</div>
+          <div class="ms-text"><strong>คัดเลือกกระบวนงานสำคัญ 1 กระบวนงาน</strong> — แนะนำให้เลือก "การขอและออกประทานบัตร" เพราะมีข้อมูลหลายประเภท หลายหน่วยงาน และ business impact สูงที่สุด</div>
+        </div>
+        <div class="ms-item">
+          <div class="ms-num">A2</div>
+          <div class="ms-text"><strong>จัดทำ Enterprise Data Model ระดับ Conceptual</strong> — แสดงความสัมพันธ์ระหว่าง Entity หลัก: ผู้ประกอบการ / แหล่งแร่ / ใบอนุญาต / พื้นที่ GIS / EIA / ค่าภาคหลวง</div>
+        </div>
+        <div class="ms-item">
+          <div class="ms-num">A3</div>
+          <div class="ms-text"><strong>วาด Data Flow Diagram (DFD)</strong> ของกระบวนงานที่เลือก — ระบุให้ชัดว่าข้อมูลแต่ละประเภทไหลจากไหนไปไหน ใครสร้าง ใครใช้ ระบบใดรับ</div>
+        </div>
+        <div class="ms-item">
+          <div class="ms-num">A4</div>
+          <div class="ms-text"><strong>กำหนด Data Life Cycle อย่างเป็นทางการ</strong> — สร้าง → ตรวจสอบ → อนุมัติ → ใช้งาน → เก็บถาวร → ทำลาย พร้อมระยะเวลาตาม พ.ร.บ. แร่</div>
+        </div>
+        <div class="ms-item">
+          <div class="ms-num">A5</div>
+          <div class="ms-text"><strong>ออกแบบ Logical Data Architecture</strong> ที่รองรับ Hybrid (กระดาษ+ดิจิทัล) — ระบุจุดเชื่อมต่อ API ระหว่าง i-Single Form / e-Mining / GIS / EIA / สอจ.</div>
+        </div>
+        <div class="ms-item">
+          <div class="ms-num">A6</div>
+          <div class="ms-text"><strong>จัดทำ Data Catalog + Metadata Repository</strong> เบื้องต้น ครอบคลุมชุดข้อมูลสำคัญ ≥ 20 ชุดแรก พร้อม Data Dictionary ภาษาไทย</div>
+        </div>
+        <div class="ms-item">
+          <div class="ms-num">A7</div>
+          <div class="ms-text"><strong>กำหนด Data Classification Standard ระดับแรก</strong> — แบ่ง: สาธารณะ / ภายในองค์กร / ลับ (PII/ค่าภาคหลวง) / ลับมาก สอดคล้อง PDPA</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MILESTONE 4 -->
+    <div class="ms-card ms4">
+      <div class="ms-hdr">
+        <div class="ms-badge">งวด 4</div>
+        <div class="ms-title">กรอบธรรมาภิบาลข้อมูล (Data Governance)<br><span style="font-size:9.5px;font-weight:400">ส่งมอบภายในวันที่ 240 · 25% ของวงเงิน</span></div>
+      </div>
+      <div class="ms-items">
+        <div class="ms-item">
+          <div class="ms-num">G1</div>
+          <div class="ms-text"><strong>จัดทำ DG Framework ตาม สพร. 3 องค์ประกอบ</strong> — (1) Definition & Rules (2) DG Structure (3) DG Process — โดยอ้างอิงบริบทแร่ธาตุเฉพาะ กพร.</div>
+        </div>
+        <div class="ms-item">
+          <div class="ms-num">G2</div>
+          <div class="ms-text"><strong>ออกแบบ Data Policy ฉบับแรก (9 นโยบาย)</strong> ตาม TOR ข้อ 4.11 — ครอบคลุม: Data Policy / Classification / Exchange / PII / Security / Quality / Open Data / Innovation / Assessment</div>
+        </div>
+        <div class="ms-item">
+          <div class="ms-num">G3</div>
+          <div class="ms-text"><strong>กำหนด Data Exchange Standard กับหน่วยงานพันธมิตร</strong> — สพร. / กพส. / สผ. / กรมทรัพยากรธรณี / i-Industry (ปก.อก.) — ออกแบบ API Schema มาตรฐาน</div>
+        </div>
+        <div class="ms-item">
+          <div class="ms-num">G4</div>
+          <div class="ms-text"><strong>วางโครงสร้าง DGC และ Role ทุกระดับ</strong> — กำหนด RACI Matrix: ใครรับผิดชอบ ใครรับทราบ ใครให้ความเห็นชอบ สำหรับข้อมูลแต่ละประเภท</div>
+        </div>
+        <div class="ms-item">
+          <div class="ms-num">G5</div>
+          <div class="ms-text"><strong>ออกแบบ Data Quality KPI และกระบวนการตรวจสอบ</strong> — วัดความครบถ้วน ถูกต้อง ทันสมัย สม่ำเสมอ รายงานอัตโนมัติผ่าน Dashboard ศสท.</div>
+        </div>
+        <div class="ms-item">
+          <div class="ms-num">G6</div>
+          <div class="ms-text"><strong>จัดทำ Compliance Mapping</strong> — เชื่อม DG Policy กับ พ.ร.บ. แต่ละฉบับ แสดงให้เห็นชัดว่า Policy ใดตอบสนองกฎหมายใด</div>
+        </div>
+        <div class="ms-item">
+          <div class="ms-num">G7</div>
+          <div class="ms-text"><strong>จัดฝึกอบรม ≥ 100 คน</strong> — แบ่งเป็น 3 กลุ่ม: ผู้บริหาร (นโยบาย) / เจ้าหน้าที่ IT (ระบบ) / เจ้าหน้าที่สาย กพร.-สรข. (ปฏิบัติ) รูปแบบออนไลน์</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 4: DIGITAL FLOW UPGRADE ========== -->
+<div class="sec">
+  <div class="sec-t">ข้อเสนอแนะที่ 2 : ปรับโครงสร้างการไหลข้อมูลให้เป็นดิจิทัลตั้งแต่ต้นน้ำ</div>
+  <table class="ptable">
+    <tr>
+      <th style="width:110px">จุดในกระบวนงาน</th>
+      <th>ปัญหาปัจจุบัน</th>
+      <th style="width:200px">ข้อเสนอแนะ</th>
+      <th style="width:60px">ลำดับ</th>
+    </tr>
+    <tr class="p-high">
+      <td><strong>ผู้ประกอบการ<br>→ สอจ.</strong></td>
+      <td>i-Single Form รับบางส่วน — ยังต้องแนบเอกสารกระดาษ พ.ร.บ. แร่</td>
+      <td>กำหนด Minimum Digital Dataset ที่รับผ่าน i-Single Form ได้ พร้อม Digital Tracking Number สำหรับทุกคำขอ</td>
+      <td><span class="pill pill-h">สูง</span></td>
+    </tr>
+    <tr class="p-high">
+      <td><strong>สอจ. → สรข.</strong></td>
+      <td>ส่งผ่านหนังสือราชการ — ข้ามสังกัด ปก.อก. ↔ กพร. ไม่มี API</td>
+      <td>ออกแบบ Data Exchange Protocol ระหว่าง สอจ.–สรข. ผ่าน Government Data Exchange (GDX) หรือ API Gateway กลาง</td>
+      <td><span class="pill pill-h">สูง</span></td>
+    </tr>
+    <tr class="p-mid">
+      <td><strong>สรข. 8 เขต<br>→ กวบ.</strong></td>
+      <td>รายงานส่งมาเป็น PDF/Word ต่าง format — ต้องกรอกซ้ำ</td>
+      <td>กำหนด Standard Template (ดิจิทัล) สำหรับรายงาน สรข. ทุกประเภท พร้อม Validation Rules อัตโนมัติก่อนส่ง</td>
+      <td><span class="pill pill-m">กลาง</span></td>
+    </tr>
+    <tr class="p-mid">
+      <td><strong>กวบ. → ศสท.</strong></td>
+      <td>ศสท. รับข้อมูลจาก กวบ. แบบ ad hoc — ไม่มี automated feed</td>
+      <td>ออกแบบ Event-driven Data Pipeline: เมื่อ กวบ. อนุมัติประทานบัตร → trigger อัตโนมัติ → ศสท. Dashboard อัปเดต</td>
+      <td><span class="pill pill-m">กลาง</span></td>
+    </tr>
+    <tr class="p-low">
+      <td><strong>ศสท. → กยผ.<br>→ ผู้บริหาร</strong></td>
+      <td>รายงานทำด้วยมือ Export Excel — ไม่ real-time</td>
+      <td>พัฒนา Executive Dashboard เชื่อมฐานข้อมูลโดยตรง แสดง KPI สำคัญ: ใบอนุญาต / ค่าภาคหลวง / ESG / สถิติแร่ แบบ near real-time</td>
+      <td><span class="pill pill-l">ต่อ</span></td>
+    </tr>
+  </table>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 5: ROADMAP ========== -->
+<div class="sec">
+  <div class="sec-t">แผนปฏิบัติการ 270 วัน — เตรียมสู่ Data Architecture & Governance</div>
+  <div class="roadmap">
+    <div class="rm-row">
+      <div class="rm-phase rm-p1">วันที่ 1–15<br>(งวด 1)</div>
+      <div class="rm-content">
+        <span class="rm-task">ศึกษากฎหมายที่เกี่ยวข้อง</span>
+        <span class="rm-task">จัดตั้ง DGC ชั่วคราว</span>
+        <span class="rm-task">Inception Report</span>
+        <span class="rm-task">สัมภาษณ์ผู้บริหาร/ผู้เกี่ยวข้อง</span>
+      </div>
+    </div>
+    <div class="rm-row">
+      <div class="rm-phase rm-p2">วันที่ 16–120<br>(งวด 2)</div>
+      <div class="rm-content">
+        <span class="rm-task">Workshop ทุกกอง / สรข.</span>
+        <span class="rm-task">Data Inventory ครบทุกชุดข้อมูล</span>
+        <span class="rm-task">Gap Analysis Report</span>
+        <span class="rm-task">คัดเลือกกระบวนงานสำคัญ</span>
+        <span class="rm-task">ร่าง Data Classification ระดับแรก</span>
+      </div>
+    </div>
+    <div class="rm-row">
+      <div class="rm-phase" style="background:#DCEDC8;color:#1B5E20;border:1px solid #AED581;font-size:10px;font-weight:700;text-align:center;padding:.35rem .4rem;border-radius:6px">วันที่ 121–150<br>(งวด 3) ★</div>
+      <div class="rm-content">
+        <span class="rm-task" style="background:#C8E6C9;border-color:#81C784;color:#1B5E20">Data Flow Diagram (DFD)</span>
+        <span class="rm-task" style="background:#C8E6C9;border-color:#81C784;color:#1B5E20">Enterprise Data Model</span>
+        <span class="rm-task" style="background:#C8E6C9;border-color:#81C784;color:#1B5E20">Data Life Cycle Map</span>
+        <span class="rm-task" style="background:#C8E6C9;border-color:#81C784;color:#1B5E20">Data Catalog ≥20 ชุด</span>
+        <span class="rm-task" style="background:#C8E6C9;border-color:#81C784;color:#1B5E20">Metadata Repository</span>
+      </div>
+    </div>
+    <div class="rm-row">
+      <div class="rm-phase" style="background:#E1BEE7;color:#4A148C;border:1px solid #CE93D8;font-size:10px;font-weight:700;text-align:center;padding:.35rem .4rem;border-radius:6px">วันที่ 151–240<br>(งวด 4) ★</div>
+      <div class="rm-content">
+        <span class="rm-task" style="background:#E1BEE7;border-color:#CE93D8;color:#4A148C">DG Framework (3 องค์ประกอบ)</span>
+        <span class="rm-task" style="background:#E1BEE7;border-color:#CE93D8;color:#4A148C">9 นโยบาย+มาตรฐาน</span>
+        <span class="rm-task" style="background:#E1BEE7;border-color:#CE93D8;color:#4A148C">Compliance Mapping</span>
+        <span class="rm-task" style="background:#E1BEE7;border-color:#CE93D8;color:#4A148C">RACI Matrix</span>
+        <span class="rm-task" style="background:#E1BEE7;border-color:#CE93D8;color:#4A148C">DGC Structure อย่างเป็นทางการ</span>
+      </div>
+    </div>
+    <div class="rm-row">
+      <div class="rm-phase rm-p3">วันที่ 241–270<br>(งวด 5)</div>
+      <div class="rm-content">
+        <span class="rm-task">อบรม 100 คน (Online)</span>
+        <span class="rm-task">รายงานฉบับสมบูรณ์</span>
+        <span class="rm-task">Executive Summary (TH+EN)</span>
+        <span class="rm-task">ส่งมอบ USB Flash Drive + ไฟล์ทั้งหมด</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER NOTE -->
+<div class="fnote">
+  <p><strong>สรุปข้อเสนอแนะสำคัญ 3 ข้อ :</strong> (1) <strong>จัดตั้ง Data Governance Council อย่างเป็นทางการก่อนงวด 3</strong> — กำหนด Data Owner/Steward ทุกชุดข้อมูล เพื่อให้มีผู้รับผิดชอบชัดเจนก่อน Architecture ถูกออกแบบ (2) <strong>เลือกกระบวนงาน "ประทานบัตร" เป็น Pilot ของงวด 3</strong> — มีข้อมูลหลากหลาย สะท้อนปัญหา Hybrid (กระดาษ+ดิจิทัล) ครอบคลุมทุก Pain Point (3) <strong>ออกแบบ Digital Data Flow ตั้งแต่ต้นน้ำ (ผู้ประกอบการ–สอจ.–สรข.)</strong> ควบคู่กับการยอมรับว่าบางส่วนต้องเป็นกระดาษตามกฎหมาย — แนวทาง Hybrid Model นี้คือกุญแจของ Data Architecture ที่จะใช้ได้จริง</p>
+</div>
+
+</div>

@@ -1,0 +1,264 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Sarabun',system-ui,sans-serif}
+.wrap{width:100%;padding:0 0 2rem;background:#fff;color:#1a1a1a}
+.hdr{background:#0D3B6E;padding:1.5rem 1.5rem 1.2rem;position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;right:-30px;top:-30px;width:160px;height:160px;background:#1B5EA0;border-radius:50%;opacity:.4}
+.hdr::after{content:'';position:absolute;right:60px;bottom:-40px;width:100px;height:100px;background:#1B5EA0;border-radius:50%;opacity:.25}
+.hdr-tag{font-size:11px;font-weight:500;color:#7EC8F0;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.4rem}
+.hdr-title{font-size:22px;font-weight:700;color:#fff;line-height:1.3;position:relative;z-index:1}
+.hdr-sub{font-size:13px;color:#A8D4EF;margin-top:.4rem;position:relative;z-index:1}
+.badge-row{display:flex;gap:.5rem;margin-top:.8rem;flex-wrap:wrap;position:relative;z-index:1}
+.badge{background:#1B5EA0;color:#7EC8F0;font-size:11px;padding:3px 10px;border-radius:20px;border:1px solid #2A75B8}
+
+.sec{padding:1.2rem 1.25rem .8rem}
+.sec-title{font-size:13px;font-weight:600;color:#0D3B6E;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:.5rem;margin-bottom:.9rem}
+.sec-title::before{content:'';display:inline-block;width:4px;height:16px;background:#0D6EFD;border-radius:2px}
+
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem;margin-bottom:.5rem}
+.pillar{border-radius:10px;padding:.85rem .8rem;border:1px solid transparent}
+.p1{background:#E8F4FD;border-color:#B3D9F5}
+.p2{background:#E8F5E9;border-color:#A5D6A7}
+.p3{background:#FFF3E0;border-color:#FFCC80}
+.p4{background:#F3E5F5;border-color:#CE93D8}
+.p5{background:#E0F2F1;border-color:#80CBC4}
+.p6{background:#FBE9E7;border-color:#FFAB91}
+.pillar-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:.5rem}
+.i1{background:#1565C0}.i2{background:#2E7D32}.i3{background:#E65100}
+.i4{background:#6A1B9A}.i5{background:#00695C}.i6{background:#BF360C}
+.pillar-name{font-size:12px;font-weight:600;color:#1a1a1a;line-height:1.3;margin-bottom:.25rem}
+.pillar-desc{font-size:11px;color:#555;line-height:1.5}
+
+.flow-wrap{display:flex;align-items:center;gap:0;overflow-x:auto;padding-bottom:.25rem}
+.flow-step{display:flex;flex-direction:column;align-items:center;min-width:90px;position:relative}
+.flow-box{background:#0D3B6E;color:#fff;border-radius:8px;padding:.5rem .6rem;font-size:11px;font-weight:500;text-align:center;line-height:1.4;width:82px}
+.flow-num{background:#0D6EFD;color:#fff;width:20px;height:20px;border-radius:50%;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:.35rem}
+.flow-arrow{color:#0D6EFD;font-size:18px;margin:0 2px;align-self:center;padding-top:20px}
+
+.bene-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.bene-card{border-radius:12px;padding:1rem .9rem;border:1px solid transparent}
+.bc1{background:#E8F4FD;border-color:#B3D9F5}
+.bc2{background:#E8F5E9;border-color:#A5D6A7}
+.bc3{background:#FFF8E1;border-color:#FFE082}
+.bene-hdr{display:flex;align-items:center;gap:.5rem;margin-bottom:.7rem}
+.bene-icon-wrap{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.bi1{background:#0D3B6E}.bi2{background:#1B5E20}.bi3{background:#F57F17}
+.bene-label{font-size:13px;font-weight:700;line-height:1.3}
+.bl1{color:#0D3B6E}.bl2{color:#1B5E20}.bl3{color:#E65100}
+.bene-list{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.bene-list li{font-size:11.5px;color:#333;line-height:1.5;display:flex;align-items:flex-start;gap:.4rem}
+.bene-list li::before{content:'✓';color:#0D6EFD;font-weight:700;font-size:11px;flex-shrink:0;margin-top:1px}
+.bc2 .bene-list li::before{color:#2E7D32}
+.bc3 .bene-list li::before{color:#E65100}
+
+.strat{display:grid;grid-template-columns:repeat(2,1fr);gap:.65rem;margin-top:.2rem}
+.strat-item{background:#F5F7FA;border:1px solid #DDE3EA;border-radius:8px;padding:.65rem .75rem;display:flex;align-items:flex-start;gap:.5rem}
+.strat-dot{width:10px;height:10px;border-radius:50%;margin-top:3px;flex-shrink:0}
+.sd1{background:#0D3B6E}.sd2{background:#1B5E20}.sd3{background:#E65100}.sd4{background:#6A1B9A}
+.strat-text{font-size:11px;color:#333;line-height:1.5}
+.strat-text strong{color:#0D3B6E;display:block;font-size:11.5px;margin-bottom:2px}
+
+.footer{margin:.8rem 1.25rem 0;padding:.75rem 1rem;background:#F0F7FF;border-radius:8px;border-left:4px solid #0D6EFD}
+.footer p{font-size:11px;color:#333;line-height:1.6}
+.footer strong{color:#0D3B6E}
+.divider{height:1px;background:#EEE;margin:0 1.25rem}
+</style>
+
+<h2 class="sr-only">กรอบการบริหารจัดการข้อมูล Data Governance กรมอุตสาหกรรมพื้นฐานและการเหมืองแร่ (กพร./DPIM) พร้อมประโยชน์ต่อกรม ประชาชน และผู้มีส่วนได้เสีย</h2>
+
+<div class="wrap">
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-tag">กรมอุตสาหกรรมพื้นฐานและการเหมืองแร่ · DPIM</div>
+  <div class="hdr-title">กรอบการบริหารจัดการข้อมูล<br>Data Governance สำหรับ กพร.</div>
+  <div class="hdr-sub">ข้อมูลดี · บริการเร็ว · กำกับดูแลได้ · มีคุณค่าต่อทุกภาคส่วน</div>
+  <div class="badge-row">
+    <span class="badge">แผน MDES</span>
+    <span class="badge">รัฐบาลดิจิทัล</span>
+    <span class="badge">PDPA 2562</span>
+    <span class="badge">DGA Guideline</span>
+    <span class="badge">เหมืองแร่ยั่งยืน</span>
+  </div>
+</div>
+
+<!-- PILLARS -->
+<div class="sec">
+  <div class="sec-title">6 เสาหลักของ Data Governance กพร.</div>
+  <div class="pillars">
+    <div class="pillar p1">
+      <div class="pillar-icon i1" style="color:#fff;font-size:14px">⚖</div>
+      <div class="pillar-name">นโยบาย & กำกับดูแล</div>
+      <div class="pillar-desc">กำหนดผู้รับผิดชอบ Data Owner, Data Steward และนโยบายข้อมูลทั่วทั้งองค์กร</div>
+    </div>
+    <div class="pillar p2">
+      <div class="pillar-icon i2" style="color:#fff;font-size:14px">✓</div>
+      <div class="pillar-name">คุณภาพข้อมูล</div>
+      <div class="pillar-desc">กำหนดมาตรฐาน ตรวจสอบ ล้างข้อมูลให้ถูกต้อง ครบถ้วน ทันสมัย สม่ำเสมอ</div>
+    </div>
+    <div class="pillar p3">
+      <div class="pillar-icon i3" style="color:#fff;font-size:14px">⛨</div>
+      <div class="pillar-name">ความปลอดภัย & PDPA</div>
+      <div class="pillar-desc">ควบคุมสิทธิ์การเข้าถึง คุ้มครองข้อมูลส่วนบุคคล ป้องกันการรั่วไหล</div>
+    </div>
+    <div class="pillar p4">
+      <div class="pillar-icon i4" style="color:#fff;font-size:14px">◫</div>
+      <div class="pillar-name">สถาปัตยกรรมข้อมูล</div>
+      <div class="pillar-desc">ออกแบบ Data Model, Data Dictionary และ Metadata มาตรฐานเดียวกันทั้งกรม</div>
+    </div>
+    <div class="pillar p5">
+      <div class="pillar-icon i5" style="color:#fff;font-size:14px">⇌</div>
+      <div class="pillar-name">บูรณาการ & แชร์ข้อมูล</div>
+      <div class="pillar-desc">เชื่อมต่อกับ GIS แร่ธาตุ ระบบ e-Mining และหน่วยงานภาครัฐอื่น ผ่าน API มาตรฐาน</div>
+    </div>
+    <div class="pillar p6">
+      <div class="pillar-icon i6" style="color:#fff;font-size:14px">▤</div>
+      <div class="pillar-name">วิเคราะห์ & ใช้ประโยชน์</div>
+      <div class="pillar-desc">Dashboard วิเคราะห์แหล่งแร่ ติดตามการอนุญาต และสนับสนุนการตัดสินใจเชิงนโยบาย</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PROCESS FLOW -->
+<div class="sec">
+  <div class="sec-title">กระบวนการจัดการข้อมูลของ กพร.</div>
+  <div class="flow-wrap">
+    <div class="flow-step">
+      <div class="flow-num">1</div>
+      <div class="flow-box" style="background:#0D3B6E">รวบรวม<br>ข้อมูล<br><span style="font-size:9px;opacity:.8">Collect</span></div>
+    </div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-step">
+      <div class="flow-num">2</div>
+      <div class="flow-box" style="background:#155FA0">ตรวจสอบ<br>คุณภาพ<br><span style="font-size:9px;opacity:.8">Validate</span></div>
+    </div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-step">
+      <div class="flow-num">3</div>
+      <div class="flow-box" style="background:#1A7AC4">จัดหมวดหมู่<br>& Metadata<br><span style="font-size:9px;opacity:.8">Classify</span></div>
+    </div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-step">
+      <div class="flow-num">4</div>
+      <div class="flow-box" style="background:#1B7FA8">จัดเก็บ<br>& รักษาความ<br>ปลอดภัย<br><span style="font-size:9px;opacity:.8">Store</span></div>
+    </div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-step">
+      <div class="flow-num">5</div>
+      <div class="flow-box" style="background:#1E8C8C">บูรณาการ<br>& แชร์<br><span style="font-size:9px;opacity:.8">Integrate</span></div>
+    </div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-step">
+      <div class="flow-num">6</div>
+      <div class="flow-box" style="background:#1A7A5E">วิเคราะห์<br>& รายงาน<br><span style="font-size:9px;opacity:.8">Analyze</span></div>
+    </div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-step">
+      <div class="flow-num">7</div>
+      <div class="flow-box" style="background:#2E7D32">เผยแพร่<br>Open Data<br><span style="font-size:9px;opacity:.8">Publish</span></div>
+    </div>
+  </div>
+  <div style="margin-top:.6rem;font-size:10.5px;color:#666;padding:.5rem .75rem;background:#F5F8FF;border-radius:6px;border-left:3px solid #0D6EFD">
+    ข้อมูลหลัก ได้แก่ · ใบอนุญาตเหมืองแร่ · แหล่งแร่และพื้นที่สำรวจ · ผลกระทบสิ่งแวดล้อม · ข้อมูลผู้ประกอบการ · สถิติการผลิตแร่
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- BENEFITS -->
+<div class="sec">
+  <div class="sec-title">ประโยชน์ที่จะได้รับจาก Data Governance</div>
+  <div class="bene-grid">
+
+    <div class="bene-card bc1">
+      <div class="bene-hdr">
+        <div class="bene-icon-wrap bi1" style="color:#fff;font-size:16px">🏛</div>
+        <div>
+          <div class="bene-label bl1">ต่อกรม (กพร.)</div>
+          <div style="font-size:10px;color:#555">ประสิทธิภาพภายใน</div>
+        </div>
+      </div>
+      <ul class="bene-list">
+        <li>ข้อมูลถูกต้อง ลดข้อผิดพลาดในการออกใบอนุญาต</li>
+        <li>ประหยัดเวลา ไม่ต้องค้นหาข้อมูลซ้ำซ้อน</li>
+        <li>ตัดสินใจเชิงนโยบายด้วยข้อมูลที่เชื่อถือได้</li>
+        <li>ลดความเสี่ยงด้านกฎหมาย PDPA และ พ.ร.บ.แร่</li>
+        <li>เชื่อมต่อกับ กพส. / กรมทรัพยากรธรณี ได้เร็วขึ้น</li>
+        <li>พร้อมรับการตรวจสอบ สตง. และผู้ตรวจราชการ</li>
+      </ul>
+    </div>
+
+    <div class="bene-card bc2">
+      <div class="bene-hdr">
+        <div class="bene-icon-wrap bi2" style="color:#fff;font-size:16px">👥</div>
+        <div>
+          <div class="bene-label bl2">ต่อประชาชน</div>
+          <div style="font-size:10px;color:#555">บริการที่ดีขึ้น</div>
+        </div>
+      </div>
+      <ul class="bene-list">
+        <li>ขอใบอนุญาตเหมืองแร่ได้รวดเร็วและโปร่งใส</li>
+        <li>ตรวจสอบสถานะแหล่งแร่ใกล้บ้านได้ผ่านออนไลน์</li>
+        <li>ได้รับข้อมูลผลกระทบสิ่งแวดล้อมที่ถูกต้อง</li>
+        <li>ลดการยื่นเอกสารซ้ำและติดต่อหลายหน่วยงาน</li>
+        <li>Open Data ให้นักวิจัย สถาบันการศึกษา เข้าถึงได้</li>
+        <li>ร้องเรียนและติดตามผลได้อย่างมีระบบ</li>
+      </ul>
+    </div>
+
+    <div class="bene-card bc3">
+      <div class="bene-hdr">
+        <div class="bene-icon-wrap bi3" style="color:#fff;font-size:16px">🤝</div>
+        <div>
+          <div class="bene-label bl3">ต่อผู้มีส่วนได้เสีย</div>
+          <div style="font-size:10px;color:#555">ภาคเอกชน · ท้องถิ่น · นักลงทุน</div>
+        </div>
+      </div>
+      <ul class="bene-list">
+        <li>ผู้ประกอบการแร่วางแผนการลงทุนได้แม่นยำขึ้น</li>
+        <li>นักลงทุนต่างชาติเชื่อมั่นข้อมูลและความโปร่งใส</li>
+        <li>อปท. รับข้อมูลพื้นที่เหมืองใกล้ชุมชนได้ครบถ้วน</li>
+        <li>ชุมชนรับรู้สิทธิ์และมีส่วนร่วมในกระบวนการ EIA</li>
+        <li>หน่วยงานพันธมิตรแชร์ข้อมูลร่วมกันได้ผ่าน API</li>
+        <li>เกิดห่วงโซ่คุณค่าแร่ธาตุยั่งยืน (Critical Minerals)</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- STRATEGY ALIGNMENT -->
+<div class="sec" style="padding-bottom:0">
+  <div class="sec-title">สอดคล้องกับแผนยุทธศาสตร์สำคัญ</div>
+  <div class="strat">
+    <div class="strat-item">
+      <div class="strat-dot sd1"></div>
+      <div class="strat-text"><strong>แผนพัฒนารัฐบาลดิจิทัล 2566–2570</strong>เปิดเผยข้อมูลภาครัฐ (Open Data) และให้บริการ Digital Government ครบวงจร</div>
+    </div>
+    <div class="strat-item">
+      <div class="strat-dot sd2"></div>
+      <div class="strat-text"><strong>ยุทธศาสตร์ชาติ 20 ปี (ด้านการปรับสมดุล)</strong>เพิ่มขีดความสามารถในการบริหารจัดการทรัพยากรแร่อย่างยั่งยืน</div>
+    </div>
+    <div class="strat-item">
+      <div class="strat-dot sd3"></div>
+      <div class="strat-text"><strong>แผน DPIM Digital Transformation</strong>ยกระดับระบบ e-Mining เชื่อมข้อมูลใบอนุญาต GIS แหล่งแร่ และ EIA ไว้ในที่เดียว</div>
+    </div>
+    <div class="strat-item">
+      <div class="strat-dot sd4"></div>
+      <div class="strat-text"><strong>Critical Minerals Strategy (EV/Battery)</strong>บริหารข้อมูลแร่ลิเทียม นิกเกิล แมงกานีส รองรับอุตสาหกรรมยานยนต์ไฟฟ้าของไทย</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER NOTE -->
+<div class="footer" style="margin-top:1rem">
+  <p><strong>สรุปสั้น:</strong> Data Governance ของ กพร. คือการสร้าง "ระบบกติกาข้อมูล" ที่ทำให้ทุกคนรู้ว่า ใครเป็นเจ้าของข้อมูล · ข้อมูลอยู่ที่ไหน · ข้อมูลถูกต้องแค่ไหน · ใครเข้าถึงได้บ้าง — ผลลัพธ์คือ <strong>กรมแข็งแกร่งขึ้น ประชาชนได้รับบริการดีขึ้น และประเทศใช้ทรัพยากรแร่ได้อย่างมีประสิทธิภาพและโปร่งใส</strong></p>
+</div>
+
+</div>
