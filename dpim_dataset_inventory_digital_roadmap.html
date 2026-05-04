@@ -1,0 +1,729 @@
+
+<h2 class="sr-only">บัญชีข้อมูลและแผนการเปลี่ยนผ่านดิจิทัล กพร. — แจกแจงชุดข้อมูลตามแหล่ง พร้อม 4 Phase Digital Transformation</h2>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);font-size:14px;color:var(--color-text-primary);background:transparent}
+.tabs{display:flex;gap:4px;padding:1rem 1rem 0;border-bottom:0.5px solid var(--color-border-tertiary);overflow-x:auto}
+.tab{padding:8px 16px;border-radius:var(--border-radius-md) var(--border-radius-md) 0 0;border:0.5px solid var(--color-border-tertiary);border-bottom:none;cursor:pointer;font-size:13px;color:var(--color-text-secondary);background:var(--color-background-secondary);white-space:nowrap;transition:all .15s}
+.tab.active{background:var(--color-background-primary);color:var(--color-text-primary);font-weight:500;border-color:var(--color-border-secondary)}
+.panel{display:none;padding:1.25rem 1rem}
+.panel.active{display:block}
+
+.section-eyebrow{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:.4rem}
+.section-title{font-size:17px;font-weight:500;color:var(--color-text-primary);margin-bottom:.25rem}
+.section-desc{font-size:13px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:1.25rem}
+
+.source-header{display:flex;align-items:center;gap:10px;padding:.6rem .9rem;border-radius:var(--border-radius-md);margin-bottom:.75rem}
+.source-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.source-label{font-size:13px;font-weight:500}
+.source-sub{font-size:12px;color:var(--color-text-secondary);margin-left:auto}
+
+.ds-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;margin-bottom:1.25rem}
+.ds-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:.85rem 1rem;position:relative;overflow:hidden}
+.ds-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+.ds-card.fg::before{background:#185FA5}
+.ds-card.sec::before{background:#0F6E56}
+.ds-card.der::before{background:#854F0B}
+
+.ds-name{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:.3rem}
+.ds-meta{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:.5rem}
+.badge{font-size:10px;padding:2px 7px;border-radius:100px;font-weight:500;border:0.5px solid}
+.badge-exists{background:#EAF3DE;color:#3B6D11;border-color:#C0DD97}
+.badge-partial{background:#FAEEDA;color:#854F0B;border-color:#FAC775}
+.badge-missing{background:#FCEBEB;color:#A32D2D;border-color:#F7C1C1}
+.badge-system{background:#E6F1FB;color:#185FA5;border-color:#B5D4F4}
+.badge-paper{background:#FAEEDA;color:#633806;border-color:#FAC775}
+.badge-hybrid{background:#EEEDFE;color:#3C3489;border-color:#CECBF6}
+
+.ds-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.55}
+.ds-source{font-size:11px;color:var(--color-text-tertiary);margin-top:.4rem}
+
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:1rem;padding:.6rem .8rem;background:var(--color-background-secondary);border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary)}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--color-text-secondary)}
+.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+.divider{height:0.5px;background:var(--color-border-tertiary);margin:1.25rem 0}
+
+.phase-wrap{display:flex;flex-direction:column;gap:.75rem}
+.phase-card{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;background:var(--color-background-primary)}
+.phase-head{display:flex;align-items:center;gap:12px;padding:.8rem 1rem;cursor:pointer}
+.phase-num{width:32px;height:32px;border-radius:var(--border-radius-md);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0}
+.phase-title{font-size:14px;font-weight:500;flex:1}
+.phase-period{font-size:12px;color:var(--color-text-secondary)}
+.phase-body{padding:0 1rem 1rem;display:none}
+.phase-body.open{display:block}
+.ppt-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;margin-top:.75rem}
+.ppt-col{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.65rem .75rem;border:0.5px solid var(--color-border-tertiary)}
+.ppt-head{font-size:11px;font-weight:500;letter-spacing:.04em;color:var(--color-text-secondary);margin-bottom:.4rem;text-transform:uppercase}
+.ppt-items{display:flex;flex-direction:column;gap:.3rem}
+.ppt-item{font-size:12px;color:var(--color-text-primary);line-height:1.5;display:flex;gap:.4rem;align-items:flex-start}
+.ppt-item::before{content:'·';color:var(--color-text-tertiary);flex-shrink:0;margin-top:1px}
+
+.chevron{font-size:12px;color:var(--color-text-tertiary);transition:transform .2s}
+.chevron.open{transform:rotate(180deg)}
+
+.deliverables{display:flex;flex-wrap:wrap;gap:6px;margin-top:.6rem}
+.del-chip{font-size:11px;padding:3px 9px;border-radius:100px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary)}
+
+.arch-wrap{display:flex;flex-direction:column;gap:1rem}
+.arch-row{display:grid;grid-template-columns:140px 1fr;gap:.75rem;align-items:start}
+.arch-label{font-size:12px;font-weight:500;color:var(--color-text-secondary);padding:.4rem 0;border-right:0.5px solid var(--color-border-tertiary);padding-right:.75rem;text-align:right;line-height:1.5}
+.arch-content{display:flex;flex-wrap:wrap;gap:6px;padding:.1rem 0}
+.arch-chip{font-size:12px;padding:4px 10px;border-radius:var(--border-radius-md);border:0.5px solid;color:var(--color-text-secondary)}
+
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.25rem}
+.stat-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.75rem 1rem;text-align:center}
+.stat-num{font-size:22px;font-weight:500;line-height:1}
+.stat-label{font-size:11px;color:var(--color-text-secondary);margin-top:.25rem}
+
+.arrow-row{display:flex;align-items:center;gap:4px;margin:.75rem 0;overflow-x:auto;padding-bottom:4px}
+.arr-box{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:5px 10px;font-size:11px;font-weight:500;color:var(--color-text-secondary);white-space:nowrap;flex-shrink:0}
+.arr-arrow{font-size:14px;color:var(--color-text-tertiary);flex-shrink:0}
+
+.readiness-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:.75rem}
+.readiness-table th{text-align:left;padding:6px 10px;font-size:11px;font-weight:500;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary)}
+.readiness-table td{padding:7px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-primary);vertical-align:top;line-height:1.5}
+.readiness-table tr:last-child td{border-bottom:none}
+.r-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
+</style>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab('datasets')">บัญชีชุดข้อมูล</div>
+  <div class="tab" onclick="showTab('arch')">Data Architecture ปัจจุบัน</div>
+  <div class="tab" onclick="showTab('phases')">4 Phase Digital Transformation</div>
+  <div class="tab" onclick="showTab('ppt')">People · Process · Technology</div>
+</div>
+
+<div id="datasets" class="panel active">
+  <div class="section-eyebrow">Dataset Inventory</div>
+  <div class="section-title">บัญชีชุดข้อมูลของ กพร. — แจกแจงตามแหล่งที่มา</div>
+  <div class="section-desc">แบ่งเป็น 3 กลุ่มหลัก ตามวิธีที่ได้ข้อมูลมา สถานะปัจจุบัน และสิ่งที่ต้องพัฒนาเพิ่ม</div>
+
+  <div class="stat-row">
+    <div class="stat-card"><div class="stat-num" style="color:#185FA5">23</div><div class="stat-label">ชุดข้อมูลที่รวบรวมได้จาก Focus Group</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:#0F6E56">14</div><div class="stat-label">ชุดข้อมูล Secondary / Open Data</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:#854F0B">18</div><div class="stat-label">ชุดข้อมูลที่ควรมีจากการวิเคราะห์</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:#A32D2D">31</div><div class="stat-label">ชุดข้อมูลที่ยังขาด / ไม่มีระบบรองรับ</div></div>
+  </div>
+
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:#3B6D11"></div>มีแล้ว ครบถ้วน</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#854F0B"></div>มีบางส่วน</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#A32D2D"></div>ยังไม่มี</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#185FA5"></div>ระบบดิจิทัล</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#633806"></div>กระดาษ</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#3C3489"></div>Hybrid</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#185FA5;border:0.5px solid #185FA5;border-radius:2px"></div>Focus Group</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#0F6E56;border-radius:2px"></div>Secondary</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#854F0B;border-radius:2px"></div>วิเคราะห์ควรมี</div>
+  </div>
+
+  <div class="source-header" style="background:#EFF6FF;border:0.5px solid #B5D4F4">
+    <div class="source-dot" style="background:#185FA5"></div>
+    <div class="source-label" style="color:#0C447C">กลุ่มที่ 1 : ข้อมูลจาก Focus Group (ข้อมูลปฐมภูมิ)</div>
+    <div class="source-sub">รวบรวมจากการสัมภาษณ์และประชุมกลุ่มย่อยภายใน กพร.</div>
+  </div>
+
+  <div class="ds-grid">
+    <div class="ds-card fg">
+      <div class="ds-name">ข้อมูลใบอนุญาตอาชญาบัตร</div>
+      <div class="ds-meta"><span class="badge badge-partial">มีบางส่วน</span><span class="badge badge-hybrid">Hybrid</span></div>
+      <div class="ds-desc">ทะเบียนคำขอ สถานะการพิจารณา ผู้ยื่นคำขอ พื้นที่สำรวจ ชนิดแร่ที่ต้องการสำรวจ วันหมดอายุ — ส่วนหนึ่งอยู่ในระบบ ส่วนหนึ่งเป็นกระดาษ</div>
+      <div class="ds-source">แหล่ง: กวบ. · สรข. ทุกเขต · i-Single Form (บางส่วน)</div>
+    </div>
+    <div class="ds-card fg">
+      <div class="ds-name">ข้อมูลประทานบัตร</div>
+      <div class="ds-meta"><span class="badge badge-partial">มีบางส่วน</span><span class="badge badge-paper">กระดาษ (พ.ร.บ.)</span></div>
+      <div class="ds-desc">เลขที่ประทานบัตร พิกัดขอบเขต ผู้ถือ วันออก วันหมดอายุ เงื่อนไข ชนิดแร่ ขนาดพื้นที่ — ฉบับจริงต้องเป็นกระดาษ</div>
+      <div class="ds-source">แหล่ง: กวบ. · ระบบทะเบียนใบอนุญาตภายใน</div>
+    </div>
+    <div class="ds-card fg">
+      <div class="ds-name">ข้อมูลผู้ประกอบการ / บริษัทเหมือง</div>
+      <div class="ds-meta"><span class="badge badge-partial">มีบางส่วน</span><span class="badge badge-system">ระบบ</span></div>
+      <div class="ds-desc">ชื่อบริษัท ทะเบียนการค้า ผู้มีอำนาจ ที่ตั้ง ประวัติการถือประทานบัตร ประวัติการชำระค่าภาคหลวง</div>
+      <div class="ds-source">แหล่ง: i-Industry · DBD · กวบ.</div>
+    </div>
+    <div class="ds-card fg">
+      <div class="ds-name">รายงานการผลิตแร่รายเดือน</div>
+      <div class="ds-meta"><span class="badge badge-exists">มีแล้ว</span><span class="badge badge-paper">กระดาษ</span></div>
+      <div class="ds-desc">ปริมาณการผลิตแร่แยกตามชนิด ขนาด และพื้นที่เหมือง รายงานจากผู้ประกอบการส่ง กพร. ทุกเดือน</div>
+      <div class="ds-source">แหล่ง: สรข. ทุกเขต → กวบ. (รูปแบบกระดาษ/PDF)</div>
+    </div>
+    <div class="ds-card fg">
+      <div class="ds-name">ค่าภาคหลวงแร่</div>
+      <div class="ds-meta"><span class="badge badge-exists">มีแล้ว</span><span class="badge badge-system">ระบบ</span></div>
+      <div class="ds-desc">รายรับค่าภาคหลวงแยกตามชนิดแร่ ผู้ประกอบการ และพื้นที่ — อยู่ในระบบการเงินกรม แต่ไม่ได้เชื่อมกับ Data Platform</div>
+      <div class="ds-source">แหล่ง: กระทรวงการคลัง · ระบบการเงินภายใน</div>
+    </div>
+    <div class="ds-card fg">
+      <div class="ds-name">ข้อมูลรายงาน EIA เหมืองแร่</div>
+      <div class="ds-meta"><span class="badge badge-partial">มีบางส่วน</span><span class="badge badge-hybrid">Hybrid</span></div>
+      <div class="ds-desc">รายงานผลกระทบสิ่งแวดล้อม มาตรการป้องกัน รายงานติดตาม — บางส่วนอยู่ใน สผ. บางส่วนอยู่ใน กวบ.</div>
+      <div class="ds-source">แหล่ง: สผ. · กวบ. · ผู้ประกอบการ</div>
+    </div>
+    <div class="ds-card fg">
+      <div class="ds-name">ข้อมูลจำนวนคนงานเหมือง</div>
+      <div class="ds-meta"><span class="badge badge-partial">มีบางส่วน</span><span class="badge badge-paper">กระดาษ</span></div>
+      <div class="ds-desc">จำนวนแรงงาน แรงงานต่างชาติ ความปลอดภัยในการทำงาน อุบัติเหตุ — รายงานจาก สรข. ปีละครั้ง</div>
+      <div class="ds-source">แหล่ง: สรข. ทุกเขต · กรมสวัสดิการฯ</div>
+    </div>
+    <div class="ds-card fg">
+      <div class="ds-name">ข้อมูลการตรวจสอบพื้นที่เหมือง (รายงาน สรข.)</div>
+      <div class="ds-meta"><span class="badge badge-exists">มีแล้ว</span><span class="badge badge-paper">กระดาษ</span></div>
+      <div class="ds-desc">บันทึกการตรวจสอบพื้นที่จริง ผลการรังวัด ความเห็น สรข. ส่งมาที่ กวบ. — อยู่ในรูปแบบ Word/PDF ไม่มีโครงสร้าง</div>
+      <div class="ds-source">แหล่ง: สรข. 1–8 → กวบ.</div>
+    </div>
+    <div class="ds-card fg">
+      <div class="ds-name">ข้อมูล GIS พื้นที่เหมืองและแหล่งแร่</div>
+      <div class="ds-meta"><span class="badge badge-partial">มีบางส่วน</span><span class="badge badge-system">ระบบ</span></div>
+      <div class="ds-desc">พิกัดขอบเขตประทานบัตร แผนที่ธรณีวิทยา พื้นที่สำรวจ — มีระบบ GIS แต่ข้อมูลไม่ครบและไม่ update สม่ำเสมอ</div>
+      <div class="ds-source">แหล่ง: ระบบ GIS กพร. · กรมทรัพยากรธรณี</div>
+    </div>
+    <div class="ds-card fg">
+      <div class="ds-name">แผนผังเหมืองและแผนการทำเหมือง</div>
+      <div class="ds-meta"><span class="badge badge-exists">มีแล้ว</span><span class="badge badge-paper">กระดาษ</span></div>
+      <div class="ds-desc">แผนผัง cross-section ระบบระบายน้ำ แผนการดำเนินงาน — ยื่นประกอบคำขอประทานบัตร ส่วนใหญ่เก็บในแฟ้ม</div>
+      <div class="ds-source">แหล่ง: ผู้ประกอบการ → กวบ.</div>
+    </div>
+    <div class="ds-card fg">
+      <div class="ds-name">ข้อมูลเรื่องร้องเรียนและข้อพิพาท</div>
+      <div class="ds-meta"><span class="badge badge-missing">ยังไม่มีระบบ</span><span class="badge badge-paper">กระดาษ</span></div>
+      <div class="ds-desc">การร้องเรียนจากชุมชน ข้อพิพาทพื้นที่เหมือง สถานะการแก้ไข — เก็บในรูปหนังสือราชการ ไม่มีฐานข้อมูลกลาง</div>
+      <div class="ds-source">แหล่ง: สอจ. · กวบ. · สรข.</div>
+    </div>
+    <div class="ds-card fg">
+      <div class="ds-name">ข้อมูลแผนฟื้นฟูพื้นที่หลังเหมือง</div>
+      <div class="ds-meta"><span class="badge badge-missing">ยังไม่มีระบบ</span><span class="badge badge-paper">กระดาษ</span></div>
+      <div class="ds-desc">แผนฟื้นฟู ความคืบหน้า งบประมาณ พื้นที่ที่ฟื้นฟูแล้ว — ข้อกำหนดใน EIA แต่ไม่มีระบบติดตาม</div>
+      <div class="ds-source">แหล่ง: กวบ. · ผู้ประกอบการ</div>
+    </div>
+    <div class="ds-card fg">
+      <div class="ds-name">ข้อมูลวัตถุอันตรายในเหมือง</div>
+      <div class="ds-meta"><span class="badge badge-missing">ยังไม่มีระบบ</span><span class="badge badge-paper">กระดาษ</span></div>
+      <div class="ds-desc">การใช้วัตถุระเบิด สารเคมี ปริมาณการใช้ต่อเดือน — รายงานแยกส่วน ไม่ได้รวมกับฐานข้อมูลกลาง</div>
+      <div class="ds-source">แหล่ง: สรข. · กรมโรงงานอุตสาหกรรม</div>
+    </div>
+  </div>
+
+  <div class="source-header" style="background:#E1F5EE;border:0.5px solid #9FE1CB">
+    <div class="source-dot" style="background:#0F6E56"></div>
+    <div class="source-label" style="color:#085041">กลุ่มที่ 2 : ข้อมูล Secondary Data / Open Data</div>
+    <div class="source-sub">จากแหล่งภายนอก เว็บไซต์ และ Open Data ภาครัฐ</div>
+  </div>
+
+  <div class="ds-grid">
+    <div class="ds-card sec">
+      <div class="ds-name">ข้อมูลแร่ธาตุและธรณีวิทยาประเทศไทย</div>
+      <div class="ds-meta"><span class="badge badge-exists">มีแล้ว</span><span class="badge badge-system">ระบบ</span></div>
+      <div class="ds-desc">แผนที่ธรณีวิทยา 1:250,000 ปริมาณสำรองแร่ ชนิดแร่ตามพื้นที่ — เปิดเผยบนเว็บ กรมทรัพยากรธรณี</div>
+      <div class="ds-source">แหล่ง: กรมทรัพยากรธรณี · data.go.th</div>
+    </div>
+    <div class="ds-card sec">
+      <div class="ds-name">ราคาแร่ธาตุตลาดโลก</div>
+      <div class="ds-meta"><span class="badge badge-missing">ยังไม่เชื่อม</span><span class="badge badge-system">ระบบ</span></div>
+      <div class="ds-desc">ราคา spot ทองคำ เงิน ตะกั่ว สังกะสี ดีบุก ทองแดง — มีข้อมูลจาก LME/USGS แต่ยังไม่เชื่อมกับระบบ กพร.</div>
+      <div class="ds-source">แหล่ง: LME · USGS · World Bank Commodity Data</div>
+    </div>
+    <div class="ds-card sec">
+      <div class="ds-name">สถิติการนำเข้า-ส่งออกแร่ธาตุ</div>
+      <div class="ds-meta"><span class="badge badge-exists">มีแล้ว</span><span class="badge badge-system">ระบบ</span></div>
+      <div class="ds-desc">มูลค่าและปริมาณการนำเข้า-ส่งออกแร่ธาตุ แยกตาม HS Code — จาก กรมศุลกากร / สศอ.</div>
+      <div class="ds-source">แหล่ง: กรมศุลกากร · สศอ. · data.go.th</div>
+    </div>
+    <div class="ds-card sec">
+      <div class="ds-name">ข้อมูล Critical Minerals โลก</div>
+      <div class="ds-meta"><span class="badge badge-missing">ยังไม่เชื่อม</span><span class="badge badge-system">ระบบ</span></div>
+      <div class="ds-desc">รายการแร่วิกฤติ (ลิเทียม นิกเกิล โคบอลต์ แมงกานีส) ความต้องการตลาด EV แนวโน้มอุปสงค์อุปทาน</div>
+      <div class="ds-source">แหล่ง: IEA Critical Minerals · US DOE · EU CRM List</div>
+    </div>
+    <div class="ds-card sec">
+      <div class="ds-name">ข้อมูลสิ่งแวดล้อมและคุณภาพอากาศ/น้ำรอบเหมือง</div>
+      <div class="ds-meta"><span class="badge badge-missing">ยังไม่เชื่อม</span><span class="badge badge-hybrid">Hybrid</span></div>
+      <div class="ds-desc">ค่า PM2.5 คุณภาพน้ำผิวดิน คุณภาพน้ำใต้ดิน รอบบริเวณเหมือง — มีข้อมูลใน กรมควบคุมมลพิษ</div>
+      <div class="ds-source">แหล่ง: กรมควบคุมมลพิษ · ONEP · สผ.</div>
+    </div>
+    <div class="ds-card sec">
+      <div class="ds-name">ข้อมูลทะเบียนธุรกิจ (นิติบุคคล)</div>
+      <div class="ds-meta"><span class="badge badge-exists">มีแล้ว</span><span class="badge badge-system">ระบบ</span></div>
+      <div class="ds-desc">ทะเบียนบริษัท ผู้ถือหุ้น งบการเงิน — เปิดเผยผ่าน API ของ กรมพัฒนาธุรกิจการค้า (DBD)</div>
+      <div class="ds-source">แหล่ง: DBD Open Data API · data.go.th</div>
+    </div>
+    <div class="ds-card sec">
+      <div class="ds-name">แผนที่ที่ดินและสิทธิ์ที่ดิน</div>
+      <div class="ds-meta"><span class="badge badge-partial">มีบางส่วน</span><span class="badge badge-hybrid">Hybrid</span></div>
+      <div class="ds-desc">โฉนด ที่ดิน ส.ป.ก. พื้นที่ป่าไม้ เขตอุทยาน — ต้องตรวจสอบก่อนออกประทานบัตร มีจากหลายหน่วยงาน</div>
+      <div class="ds-source">แหล่ง: กรมที่ดิน · กรมป่าไม้ · กรมอุทยานฯ</div>
+    </div>
+    <div class="ds-card sec">
+      <div class="ds-name">สถิติอุตสาหกรรมเหมืองแร่ภูมิภาค ASEAN</div>
+      <div class="ds-meta"><span class="badge badge-missing">ยังไม่มี</span><span class="badge badge-system">ระบบ</span></div>
+      <div class="ds-desc">การผลิตแร่ในประเทศเพื่อนบ้าน เปรียบเทียบ Competitiveness ค่าภาคหลวง กฎระเบียบ</div>
+      <div class="ds-source">แหล่ง: ASEAN Minerals Database · USGS International</div>
+    </div>
+  </div>
+
+  <div class="source-header" style="background:#FAEEDA;border:0.5px solid #FAC775">
+    <div class="source-dot" style="background:#854F0B"></div>
+    <div class="source-label" style="color:#633806">กลุ่มที่ 3 : ชุดข้อมูลที่ควรมีจากการวิเคราะห์ Data Flow</div>
+    <div class="source-sub">ชุดข้อมูลที่ยังขาด แต่จำเป็นต่อการเป็น Digital Organization</div>
+  </div>
+
+  <div class="ds-grid">
+    <div class="ds-card der">
+      <div class="ds-name">Master Data : ผู้ประกอบการ (Golden Record)</div>
+      <div class="ds-meta"><span class="badge badge-missing">ยังไม่มี</span></div>
+      <div class="ds-desc">ข้อมูลผู้ประกอบการ "เวอร์ชันเดียว" รวมจาก i-Industry, กวบ., ระบบค่าภาคหลวง — ปัจจุบันมีข้อมูลซ้ำในหลายระบบ</div>
+      <div class="ds-source">สร้างจาก: i-Industry + กวบ. + ระบบค่าภาคหลวง + DBD API</div>
+    </div>
+    <div class="ds-card der">
+      <div class="ds-name">สถานะ Pipeline คำขอใบอนุญาต</div>
+      <div class="ds-meta"><span class="badge badge-missing">ยังไม่มี</span></div>
+      <div class="ds-desc">Tracking ว่าคำขอแต่ละเรื่องอยู่ขั้นตอนไหน ใครถือ นานแค่ไหน — ปัจจุบันไม่มีระบบ tracking แบบ real-time</div>
+      <div class="ds-source">สร้างจาก: i-Single Form + ทะเบียนรับ สอจ. + ระบบ กวบ.</div>
+    </div>
+    <div class="ds-card der">
+      <div class="ds-name">ดัชนีสุขภาพเหมือง (Mine Health Index)</div>
+      <div class="ds-meta"><span class="badge badge-missing">ยังไม่มี</span></div>
+      <div class="ds-desc">คะแนนรวมของแต่ละเหมือง คำนวณจาก: ความปลอดภัย + EIA compliance + ค่าภาคหลวง + การรายงาน — สำหรับ risk-based oversight</div>
+      <div class="ds-source">สร้างจาก: ข้อมูลการผลิต + EIA + ค่าภาคหลวง + รายงานคนงาน</div>
+    </div>
+    <div class="ds-card der">
+      <div class="ds-name">Dashboard KPI สถิติแร่ธาตุแห่งชาติ</div>
+      <div class="ds-meta"><span class="badge badge-missing">ยังไม่มี</span></div>
+      <div class="ds-desc">ตัวเลขสรุประดับประเทศ: ปริมาณผลิต มูลค่า จำนวนใบอนุญาต รายได้ค่าภาคหลวง แนวโน้ม — real-time</div>
+      <div class="ds-source">สร้างจาก: ทุกกระบวนการต้นน้ำ ผ่าน Data Pipeline</div>
+    </div>
+    <div class="ds-card der">
+      <div class="ds-name">Predictive Data : ความต้องการแร่ธาตุในอนาคต</div>
+      <div class="ds-meta"><span class="badge badge-missing">ยังไม่มี</span></div>
+      <div class="ds-desc">โมเดลพยากรณ์ความต้องการแร่วิกฤติสำหรับ EV, Battery, Semiconductor รองรับ 5–10 ปีข้างหน้า</div>
+      <div class="ds-source">สร้างจาก: ข้อมูลโลก + แนวโน้มอุตสาหกรรม + AI/ML Model</div>
+    </div>
+    <div class="ds-card der">
+      <div class="ds-name">ESG Metrics ของภาคเหมืองแร่ไทย</div>
+      <div class="ds-meta"><span class="badge badge-missing">ยังไม่มี</span></div>
+      <div class="ds-desc">การปล่อยคาร์บอน การใช้น้ำ การฟื้นฟูพื้นที่ ผลกระทบชุมชน — จำเป็นสำหรับรายงาน ESG ระดับประเทศ</div>
+      <div class="ds-source">สร้างจาก: EIA + รายงานสิ่งแวดล้อม + ข้อมูลคนงาน + ข้อมูลชุมชน</div>
+    </div>
+    <div class="ds-card der">
+      <div class="ds-name">Risk Map พื้นที่เหมืองความเสี่ยงสูง</div>
+      <div class="ds-meta"><span class="badge badge-missing">ยังไม่มี</span></div>
+      <div class="ds-desc">แผนที่ความเสี่ยง: ดินถล่ม น้ำท่วม ใกล้ชุมชน ใกล้แหล่งน้ำ — สำหรับวางแผน Inspection priority</div>
+      <div class="ds-source">สร้างจาก: GIS + ข้อมูลสิ่งแวดล้อม + ข้อมูลภัยพิบัติ กรมป้องกันฯ</div>
+    </div>
+    <div class="ds-card der">
+      <div class="ds-name">ข้อมูลการปฏิบัติตามกฎหมาย (Compliance Tracking)</div>
+      <div class="ds-meta"><span class="badge badge-missing">ยังไม่มี</span></div>
+      <div class="ds-desc">ระบบติดตามว่าผู้ประกอบการแต่ละรายส่งรายงานครบหรือไม่ ค้างชำระค่าภาคหลวง ครบกำหนด EIA หรือยัง</div>
+      <div class="ds-source">สร้างจาก: ทะเบียนประทานบัตร + ข้อมูลรายงาน + ข้อมูลค่าภาคหลวง</div>
+    </div>
+  </div>
+</div>
+
+<div id="arch" class="panel">
+  <div class="section-eyebrow">Current State</div>
+  <div class="section-title">Data Architecture ปัจจุบันของ กพร.</div>
+  <div class="section-desc">โครงสร้างข้อมูลที่เป็นอยู่จริงในปัจจุบัน — ก่อนที่จะมีการปรับปรุง</div>
+
+  <div class="arrow-row">
+    <div class="arr-box">ผู้ประกอบการ</div>
+    <div class="arr-arrow">→</div>
+    <div class="arr-box">i-Single Form / กระดาษ</div>
+    <div class="arr-arrow">→</div>
+    <div class="arr-box">สอจ. (ปก.อก.)</div>
+    <div class="arr-arrow">→</div>
+    <div class="arr-box">สรข. 8 เขต</div>
+    <div class="arr-arrow">→</div>
+    <div class="arr-box">กวบ.</div>
+    <div class="arr-arrow">→</div>
+    <div class="arr-box">ศสท. (ด้วยมือ)</div>
+    <div class="arr-arrow">→</div>
+    <div class="arr-box">กยผ. / ผู้บริหาร</div>
+  </div>
+
+  <div class="arch-wrap">
+    <div class="arch-row">
+      <div class="arch-label">Layer รับข้อมูลเข้า</div>
+      <div class="arch-content">
+        <span class="arch-chip" style="background:#EFF6FF;border-color:#B5D4F4;color:#185FA5">i-Industry / i-Single Form</span>
+        <span class="arch-chip" style="background:#FAEEDA;border-color:#FAC775;color:#633806">แบบฟอร์มกระดาษ (พ.ร.บ.)</span>
+        <span class="arch-chip" style="background:#EEEDFE;border-color:#CECBF6;color:#3C3489">หนังสือราชการ / PDF</span>
+        <span class="arch-chip" style="background:#F1EFE8;border-color:#D3D1C7;color:#2C2C2A">Email / Fax</span>
+      </div>
+    </div>
+    <div class="arch-row">
+      <div class="arch-label">Layer จัดเก็บข้อมูล</div>
+      <div class="arch-content">
+        <span class="arch-chip" style="background:#EFF6FF;border-color:#B5D4F4;color:#185FA5">ฐานข้อมูลใบอนุญาต (กวบ.)</span>
+        <span class="arch-chip" style="background:#EFF6FF;border-color:#B5D4F4;color:#185FA5">ระบบ GIS กพร.</span>
+        <span class="arch-chip" style="background:#FAEEDA;border-color:#FAC775;color:#633806">แฟ้มกระดาษ / ตู้เอกสาร</span>
+        <span class="arch-chip" style="background:#F1EFE8;border-color:#D3D1C7;color:#2C2C2A">Excel / Spreadsheet</span>
+        <span class="arch-chip" style="background:#FAEEDA;border-color:#FAC775;color:#633806">ไฟล์ PDF สแกน</span>
+      </div>
+    </div>
+    <div class="arch-row">
+      <div class="arch-label">Layer วิเคราะห์</div>
+      <div class="arch-content">
+        <span class="arch-chip" style="background:#FCEBEB;border-color:#F7C1C1;color:#A32D2D">Excel วิเคราะห์ด้วยมือ</span>
+        <span class="arch-chip" style="background:#FCEBEB;border-color:#F7C1C1;color:#A32D2D">ไม่มี BI Tool กลาง</span>
+        <span class="arch-chip" style="background:#FCEBEB;border-color:#F7C1C1;color:#A32D2D">ไม่มี Data Pipeline</span>
+      </div>
+    </div>
+    <div class="arch-row">
+      <div class="arch-label">Layer แสดงผล</div>
+      <div class="arch-content">
+        <span class="arch-chip" style="background:#FAEEDA;border-color:#FAC775;color:#633806">รายงาน Word/PDF</span>
+        <span class="arch-chip" style="background:#FAEEDA;border-color:#FAC775;color:#633806">นำเสนอ PowerPoint</span>
+        <span class="arch-chip" style="background:#FCEBEB;border-color:#F7C1C1;color:#A32D2D">ยังไม่มี Dashboard</span>
+      </div>
+    </div>
+    <div class="arch-row">
+      <div class="arch-label">จุดเชื่อมต่อภายนอก</div>
+      <div class="arch-content">
+        <span class="arch-chip" style="background:#FCEBEB;border-color:#F7C1C1;color:#A32D2D">ไม่มี API กับ สอจ. (ปก.อก.)</span>
+        <span class="arch-chip" style="background:#FAEEDA;border-color:#FAC775;color:#633806">เชื่อม i-Industry บางส่วน</span>
+        <span class="arch-chip" style="background:#FCEBEB;border-color:#F7C1C1;color:#A32D2D">ไม่มี API กับ สผ. / กรมทรัพยากรธรณี</span>
+      </div>
+    </div>
+    <div class="arch-row">
+      <div class="arch-label">ปัญหาหลักที่พบ</div>
+      <div class="arch-content">
+        <span class="arch-chip" style="background:#FCEBEB;border-color:#F7C1C1;color:#A32D2D">ไม่มี Single Source of Truth</span>
+        <span class="arch-chip" style="background:#FCEBEB;border-color:#F7C1C1;color:#A32D2D">ข้อมูลกระจาย 5+ ระบบ</span>
+        <span class="arch-chip" style="background:#FCEBEB;border-color:#F7C1C1;color:#A32D2D">ไม่มี Data Governance</span>
+        <span class="arch-chip" style="background:#FCEBEB;border-color:#F7C1C1;color:#A32D2D">Hybrid ไม่มีมาตรฐาน</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <table class="readiness-table">
+    <tr><th>ชุดข้อมูล / ระบบ</th><th>สถานะ</th><th>ปัญหาหลัก</th><th>ความเร่งด่วน</th></tr>
+    <tr>
+      <td>ทะเบียนประทานบัตร</td>
+      <td><span class="r-dot" style="background:#854F0B"></span>มีบางส่วน</td>
+      <td>ฉบับจริงต้องเป็นกระดาษ ไม่มีเงาดิจิทัล</td>
+      <td style="color:#A32D2D;font-weight:500">สูงมาก</td>
+    </tr>
+    <tr>
+      <td>รายงานผลิตแร่รายเดือน</td>
+      <td><span class="r-dot" style="background:#854F0B"></span>มีแต่ไม่ดิจิทัล</td>
+      <td>กระดาษ/PDF ไม่มีโครงสร้างข้อมูล</td>
+      <td style="color:#A32D2D;font-weight:500">สูงมาก</td>
+    </tr>
+    <tr>
+      <td>ระบบ GIS</td>
+      <td><span class="r-dot" style="background:#854F0B"></span>มีบางส่วน</td>
+      <td>ข้อมูลไม่ครบ ไม่ update สม่ำเสมอ</td>
+      <td style="color:#BA7517;font-weight:500">สูง</td>
+    </tr>
+    <tr>
+      <td>ค่าภาคหลวงแร่</td>
+      <td><span class="r-dot" style="background:#3B6D11"></span>มีในระบบการเงิน</td>
+      <td>ไม่เชื่อมกับ Data Platform</td>
+      <td style="color:#BA7517;font-weight:500">สูง</td>
+    </tr>
+    <tr>
+      <td>EIA / สิ่งแวดล้อม</td>
+      <td><span class="r-dot" style="background:#854F0B"></span>อยู่ที่ สผ.</td>
+      <td>ไม่มี API เชื่อมกับ กพร.</td>
+      <td style="color:#BA7517;font-weight:500">กลาง</td>
+    </tr>
+    <tr>
+      <td>ข้อมูลคนงาน / ความปลอดภัย</td>
+      <td><span class="r-dot" style="background:#A32D2D"></span>รายงานปีละครั้ง</td>
+      <td>ไม่มีระบบ real-time monitoring</td>
+      <td style="color:#3B6D11;font-weight:500">ต่ำ</td>
+    </tr>
+    <tr>
+      <td>การร้องเรียน / ข้อพิพาท</td>
+      <td><span class="r-dot" style="background:#A32D2D"></span>ยังไม่มีระบบ</td>
+      <td>เก็บในหนังสือราชการ ไม่มีฐานข้อมูล</td>
+      <td style="color:#BA7517;font-weight:500">กลาง</td>
+    </tr>
+  </table>
+</div>
+
+<div id="phases" class="panel">
+  <div class="section-eyebrow">Digital Transformation Roadmap</div>
+  <div class="section-title">4 Phase สู่การเป็นองค์กรดิจิทัลสมบูรณ์</div>
+  <div class="section-desc">กรอบการพัฒนาระยะยาว 4–5 ปี แบ่งตาม maturity level ของ Data Architecture และ Governance — คลิกแต่ละ Phase เพื่อดูรายละเอียด</div>
+
+  <div class="phase-wrap">
+
+    <div class="phase-card" style="border-color:#185FA5">
+      <div class="phase-head" onclick="togglePhase('p1')">
+        <div class="phase-num" style="background:#EFF6FF;color:#185FA5">1</div>
+        <div>
+          <div class="phase-title">Foundation — วางรากฐาน Data Governance</div>
+          <div class="phase-period" style="color:#185FA5">ระยะเวลา: 12–18 เดือน  ·  โครงการ TOR นี้ครอบคลุม Phase นี้</div>
+        </div>
+        <div class="chevron" id="chev-p1">▼</div>
+      </div>
+      <div class="phase-body" id="body-p1">
+        <div class="section-desc" style="margin-bottom:.75rem">จัดตั้งโครงสร้างการกำกับดูแลข้อมูล กำหนดมาตรฐาน และสร้าง Single Source of Truth ของชุดข้อมูลสำคัญที่สุด</div>
+        <div class="deliverables">
+          <span class="del-chip">Data Governance Council</span>
+          <span class="del-chip">Data Dictionary กลาง</span>
+          <span class="del-chip">Data Classification Standard</span>
+          <span class="del-chip">Data Architecture ประทานบัตร</span>
+          <span class="del-chip">Data Catalog ≥ 20 ชุด</span>
+          <span class="del-chip">Metadata Repository</span>
+          <span class="del-chip">Hybrid Model Policy</span>
+          <span class="del-chip">9 นโยบาย Data Governance</span>
+          <span class="del-chip">อบรม 100 คน</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-card" style="border-color:#0F6E56">
+      <div class="phase-head" onclick="togglePhase('p2')">
+        <div class="phase-num" style="background:#E1F5EE;color:#0F6E56">2</div>
+        <div>
+          <div class="phase-title">Integration — เชื่อมระบบและสร้าง Data Pipeline</div>
+          <div class="phase-period" style="color:#0F6E56">ระยะเวลา: 18–24 เดือน  ·  ปีที่ 2–3</div>
+        </div>
+        <div class="chevron" id="chev-p2">▼</div>
+      </div>
+      <div class="phase-body" id="body-p2">
+        <div class="section-desc" style="margin-bottom:.75rem">เชื่อมต่อระบบทั้งหมดเข้าหากัน สร้าง API มาตรฐาน และพัฒนา Data Pipeline เพื่อให้ข้อมูลไหลอัตโนมัติ</div>
+        <div class="deliverables">
+          <span class="del-chip">API Gateway กลาง กพร.</span>
+          <span class="del-chip">เชื่อม i-Single Form ครบ</span>
+          <span class="del-chip">API กับ สผ. EIA</span>
+          <span class="del-chip">API กับ DBD (นิติบุคคล)</span>
+          <span class="del-chip">API กับ กรมทรัพยากรธรณี</span>
+          <span class="del-chip">Data Pipeline อัตโนมัติ</span>
+          <span class="del-chip">Master Data Management</span>
+          <span class="del-chip">Real-time Tracking คำขอ</span>
+          <span class="del-chip">Digital Archive ประทานบัตร</span>
+          <span class="del-chip">Standard สรข. Report Template</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-card" style="border-color:#854F0B">
+      <div class="phase-head" onclick="togglePhase('p3')">
+        <div class="phase-num" style="background:#FAEEDA;color:#854F0B">3</div>
+        <div>
+          <div class="phase-title">Intelligence — Dashboard และ Analytics Platform</div>
+          <div class="phase-period" style="color:#854F0B">ระยะเวลา: 12–18 เดือน  ·  ปีที่ 3–4</div>
+        </div>
+        <div class="chevron" id="chev-p3">▼</div>
+      </div>
+      <div class="phase-body" id="body-p3">
+        <div class="section-desc" style="margin-bottom:.75rem">สร้าง Analytics Platform Dashboard real-time และ BI Tools สำหรับทุกระดับ ตั้งแต่เจ้าหน้าที่ถึงผู้บริหาร</div>
+        <div class="deliverables">
+          <span class="del-chip">Executive Dashboard (ผู้บริหาร)</span>
+          <span class="del-chip">Operational Dashboard (กวบ./สรข.)</span>
+          <span class="del-chip">สถิติแร่ธาตุแห่งชาติ</span>
+          <span class="del-chip">Mine Health Index</span>
+          <span class="del-chip">Compliance Tracking Dashboard</span>
+          <span class="del-chip">ESG Reporting Module</span>
+          <span class="del-chip">Risk Map เหมืองความเสี่ยงสูง</span>
+          <span class="del-chip">Open Data Portal กพร.</span>
+          <span class="del-chip">BI Self-service ทุกกอง</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-card" style="border-color:#7F77DD">
+      <div class="phase-head" onclick="togglePhase('p4')">
+        <div class="phase-num" style="background:#EEEDFE;color:#534AB7">4</div>
+        <div>
+          <div class="phase-title">AI-Driven — องค์กรดิจิทัลสมบูรณ์ขับเคลื่อนด้วย AI</div>
+          <div class="phase-period" style="color:#534AB7">ระยะเวลา: ต่อเนื่อง  ·  ปีที่ 4–5+</div>
+        </div>
+        <div class="chevron" id="chev-p4">▼</div>
+      </div>
+      <div class="phase-body" id="body-p4">
+        <div class="section-desc" style="margin-bottom:.75rem">ใช้ AI/ML ในการตัดสินใจ พยากรณ์ และยกระดับบริการสู่ดิจิทัลเต็มรูปแบบ</div>
+        <div class="deliverables">
+          <span class="del-chip">AI วิเคราะห์แนวโน้มแร่ธาตุ</span>
+          <span class="del-chip">Predictive Critical Minerals Model</span>
+          <span class="del-chip">AI ตรวจสอบความผิดปกติการผลิต</span>
+          <span class="del-chip">e-Permitting ครบวงจร</span>
+          <span class="del-chip">Digital Twin เหมืองแร่</span>
+          <span class="del-chip">Chatbot บริการประชาชน</span>
+          <span class="del-chip">Automated Compliance Check</span>
+          <span class="del-chip">Data Marketplace (หน่วยงานอื่น)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="ppt" class="panel">
+  <div class="section-eyebrow">Transformation Enablers</div>
+  <div class="section-title">การเตรียมความพร้อม : People · Process · Technology</div>
+  <div class="section-desc">สิ่งที่ต้องพัฒนาในแต่ละมิติ แยกตาม Phase เพื่อให้การเปลี่ยนผ่านสำเร็จได้จริง</div>
+
+  <div style="display:flex;flex-direction:column;gap:1.25rem">
+
+    <div>
+      <div style="font-size:13px;font-weight:500;color:#185FA5;margin-bottom:.6rem;padding-bottom:.35rem;border-bottom:0.5px solid var(--color-border-tertiary)">Phase 1 : Foundation (12–18 เดือน)</div>
+      <div class="ppt-grid">
+        <div class="ppt-col">
+          <div class="ppt-head">People</div>
+          <div class="ppt-items">
+            <div class="ppt-item">แต่งตั้ง Data Governance Council อย่างเป็นทางการ</div>
+            <div class="ppt-item">กำหนด Data Owner ทุกชุดข้อมูลหลัก</div>
+            <div class="ppt-item">กำหนด Data Steward ประจำแต่ละกอง</div>
+            <div class="ppt-item">อบรม Data Literacy ≥ 100 คน</div>
+            <div class="ppt-item">สร้าง Data Champion ใน สรข. ทุกเขต</div>
+          </div>
+        </div>
+        <div class="ppt-col">
+          <div class="ppt-head">Process</div>
+          <div class="ppt-items">
+            <div class="ppt-item">จัดทำ SOP ว่าข้อมูลไหล/ตรวจ/อนุมัติอย่างไร</div>
+            <div class="ppt-item">กำหนด Standard สำหรับรายงาน สรข.</div>
+            <div class="ppt-item">วางนโยบาย Data Retention ตามกฎหมาย</div>
+            <div class="ppt-item">กำหนด Data Quality KPI แต่ละชุดข้อมูล</div>
+            <div class="ppt-item">จัดทำ Hybrid Workflow (กระดาษ+ดิจิทัล)</div>
+          </div>
+        </div>
+        <div class="ppt-col">
+          <div class="ppt-head">Technology</div>
+          <div class="ppt-items">
+            <div class="ppt-item">ติดตั้ง Data Catalog / Metadata Tool</div>
+            <div class="ppt-item">จัดทำ Data Dictionary กลาง</div>
+            <div class="ppt-item">ปรับปรุง Data Model ระบบใบอนุญาต</div>
+            <div class="ppt-item">กำหนด Data Standard ทุกระบบที่มีอยู่</div>
+            <div class="ppt-item">เริ่ม Digital Archive เอกสารสำคัญ</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:13px;font-weight:500;color:#0F6E56;margin-bottom:.6rem;padding-bottom:.35rem;border-bottom:0.5px solid var(--color-border-tertiary)">Phase 2 : Integration (18–24 เดือน)</div>
+      <div class="ppt-grid">
+        <div class="ppt-col">
+          <div class="ppt-head">People</div>
+          <div class="ppt-items">
+            <div class="ppt-item">จ้าง/พัฒนา Data Engineer ภายใน</div>
+            <div class="ppt-item">อบรม API Integration สำหรับทีม IT</div>
+            <div class="ppt-item">ประสาน Partner หน่วยงานภายนอก (สผ./DBD)</div>
+            <div class="ppt-item">พัฒนาทักษะ SQL/Python ทีม ศสท.</div>
+          </div>
+        </div>
+        <div class="ppt-col">
+          <div class="ppt-head">Process</div>
+          <div class="ppt-items">
+            <div class="ppt-item">MOU แลกเปลี่ยนข้อมูลกับหน่วยงานพันธมิตร</div>
+            <div class="ppt-item">กระบวนการ Data Quality Monitoring อัตโนมัติ</div>
+            <div class="ppt-item">Change Management สำหรับระบบใหม่</div>
+            <div class="ppt-item">กระบวนการ Onboarding ระบบใหม่ สรข.</div>
+          </div>
+        </div>
+        <div class="ppt-col">
+          <div class="ppt-head">Technology</div>
+          <div class="ppt-items">
+            <div class="ppt-item">สร้าง API Gateway กลาง กพร.</div>
+            <div class="ppt-item">พัฒนา Data Pipeline อัตโนมัติ</div>
+            <div class="ppt-item">Master Data Management Platform</div>
+            <div class="ppt-item">เชื่อม i-Single Form ครบทุกประเภทคำขอ</div>
+            <div class="ppt-item">Digital Archive ระบบกลาง</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:13px;font-weight:500;color:#854F0B;margin-bottom:.6rem;padding-bottom:.35rem;border-bottom:0.5px solid var(--color-border-tertiary)">Phase 3 : Intelligence (12–18 เดือน)</div>
+      <div class="ppt-grid">
+        <div class="ppt-col">
+          <div class="ppt-head">People</div>
+          <div class="ppt-items">
+            <div class="ppt-item">Data Analyst ประจำ กยผ. และ ศสท.</div>
+            <div class="ppt-item">อบรม Dashboard / BI ทุกระดับ</div>
+            <div class="ppt-item">สร้าง Data Storytelling Skill ผู้บริหาร</div>
+            <div class="ppt-item">พัฒนา Open Data Curator สำหรับ Public</div>
+          </div>
+        </div>
+        <div class="ppt-col">
+          <div class="ppt-head">Process</div>
+          <div class="ppt-items">
+            <div class="ppt-item">กระบวนการ Data-driven Decision Making</div>
+            <div class="ppt-item">ESG Reporting Cycle รายไตรมาส</div>
+            <div class="ppt-item">Risk-based Inspection Priority Process</div>
+            <div class="ppt-item">Open Data Publication กระบวนการ</div>
+          </div>
+        </div>
+        <div class="ppt-col">
+          <div class="ppt-head">Technology</div>
+          <div class="ppt-items">
+            <div class="ppt-item">BI Platform (Power BI / Tableau / Superset)</div>
+            <div class="ppt-item">Executive Dashboard real-time</div>
+            <div class="ppt-item">GIS Analytics Platform</div>
+            <div class="ppt-item">Open Data Portal สาธารณะ</div>
+            <div class="ppt-item">Data Lake / Data Warehouse</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:13px;font-weight:500;color:#534AB7;margin-bottom:.6rem;padding-bottom:.35rem;border-bottom:0.5px solid var(--color-border-tertiary)">Phase 4 : AI-Driven (ต่อเนื่อง)</div>
+      <div class="ppt-grid">
+        <div class="ppt-col">
+          <div class="ppt-head">People</div>
+          <div class="ppt-items">
+            <div class="ppt-item">Data Scientist / ML Engineer</div>
+            <div class="ppt-item">AI Ethics Officer / Data Privacy Officer</div>
+            <div class="ppt-item">อบรม AI Literacy ทุกระดับองค์กร</div>
+            <div class="ppt-item">วัฒนธรรม Experiment & Iterate</div>
+          </div>
+        </div>
+        <div class="ppt-col">
+          <div class="ppt-head">Process</div>
+          <div class="ppt-items">
+            <div class="ppt-item">AI Model Governance & Audit</div>
+            <div class="ppt-item">Continuous Data Quality Improvement</div>
+            <div class="ppt-item">e-Permitting กระบวนการสมบูรณ์</div>
+            <div class="ppt-item">Digital Service Design Thinking</div>
+          </div>
+        </div>
+        <div class="ppt-col">
+          <div class="ppt-head">Technology</div>
+          <div class="ppt-items">
+            <div class="ppt-item">ML Platform (สร้างและ deploy โมเดล)</div>
+            <div class="ppt-item">Predictive Analytics Engine</div>
+            <div class="ppt-item">Natural Language Processing (Thai)</div>
+            <div class="ppt-item">IoT Sensor Data (เหมืองอัจฉริยะ)</div>
+            <div class="ppt-item">Cloud-native Data Infrastructure</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+function togglePhase(id) {
+  const body = document.getElementById('body-' + id);
+  const chev = document.getElementById('chev-' + id);
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  chev.classList.toggle('open', !isOpen);
+}
+document.querySelectorAll('.tab').forEach((t, i) => {
+  const ids = ['datasets','arch','phases','ppt'];
+  t.onclick = function() {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById(ids[i]).classList.add('active');
+  };
+});
+</script>
